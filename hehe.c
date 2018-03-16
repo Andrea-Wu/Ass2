@@ -58,17 +58,24 @@ int main(int argc, char* argv[]){
 	//end testing removeDuplicates()
 	*/
 
-
+	/*	
 	//testing insertHash
 	//an array of hNode* 
 	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 10000);
 
 	hNode* test = (hNode*)malloc(sizeof(hNode));
 	test -> fileList = NULL;
-	
-	insertHash(hashTable, NULL);
+	test -> keyWord = (char*)malloc(sizeof(char) * 10);
+	test -> keyWord = "assholes";
 
-	//end testing inserrtHash
+	int bucket = hashFunction(test -> keyWord);
+	printf("bucket is %d\n", bucket);
+	test -> next = NULL;
+	
+	insertHash(hashTable, test);
+	printf("%s\n", (*(hashTable + 769)) -> keyWord);
+	//end testing insertHash
+	*/
 
 
 	return 0;
@@ -112,6 +119,7 @@ int hashFunction(char* str){
 	int i = 0;
 	while(i < strLen){
 		bucket = bucket + str[i];
+		i++;
 	}
 
 	bucket = bucket % 1000;
