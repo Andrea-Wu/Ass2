@@ -29,60 +29,81 @@ node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
 node* removeDuplicates(char** allWords, int len, char* fileName);
 void printLL(node* head);
-void insertHash(hNode** hashTable, hNode* insertMe);
+void insertKeyWord(hNode** hashTable, hNode* insertMe);
 int hashFunction(char* str);
 
 int main(int argc, char* argv[]){
-	/*
-	//testing removeDuplicates()
-	char** testArr = (char**)malloc(10 * sizeof(char*));
 	
-	int i = 0;
-	while(i < 10){
-		testArr[i] = (char*)malloc(20 * sizeof(char));
+	//hashTable is an array of Linked Lists 
+	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 
-		i++;
-	}
 
-	for(i = 0; i < 5; i++){
-		testArr[i] = "helo";
-	}
-
-	for(i = 5; i < 10; i++){
-		testArr[i] = "worl";
-	}
-
-	node* head = removeDuplicates(testArr, 10, "file.txt");
-	printLL(head);
-
-	//end testing removeDuplicates()
-	*/
-
-	/*	
-	//testing insertHash
-	//an array of hNode* 
-	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 10000);
-
-	hNode* test = (hNode*)malloc(sizeof(hNode));
-	test -> fileList = NULL;
-	test -> keyWord = (char*)malloc(sizeof(char) * 10);
-	test -> keyWord = "assholes";
-
-	int bucket = hashFunction(test -> keyWord);
-	printf("bucket is %d\n", bucket);
-	test -> next = NULL;
 	
-	insertHash(hashTable, test);
-	printf("%s\n", (*(hashTable + 769)) -> keyWord);
-	//end testing insertHash
-	*/
-
 
 	return 0;
 }
 
+void insertRecords(hNode** hashTable, node* head, char* fileName){
+	//head is an LL with node containing keyword, count, and next.
+	//we have to turn each node into a different node, containing filename, count, and next.
+	//and then insert that into the sub-LL (I just made up a word)
+	//just occurred to me that I'm inserting my nodes at the end of LL but it
+	//but it's more efficient to insert in the front. later
+	
+	node* newHead = NULL;
+	
+	while(head != NULL){
+		//copy fileName into permanent string
+		int fnLen = sizeof(fileName);
+		char* fn = (char*)malloc((fnLen + 1) * sizeof(char));
+		strcpy(fn, fileName);
+
+
+		//create new node to insert into sub-LL		
+		node* newNode = createNode(fn, head -> count, NULL);
+
+	// the following code inserts into sub-LL
+		char* currWord = head -> str;
+		int bucket = hashFunction(currWord);
+
+			//stands for "keyword linked-list head"
+		hNode* kwLLHead = hashTable[bucket];
+
+			//gets hNode corresponding with current keyword
+			//this is linear search...inefficient
+		while(strcmp(kwLLHead -> keyWord, currWord) != 0 && kwLLHead != NULL){
+			kwLLHead = kwLLHead -> next;
+		}
+	
+		//word doesn't exist as a kw in hash table
+		if(kwLLHead == NULL){
+			hNode* kwNode = (hNode*)malloc(sizeof(hNode));
+
+			//the list will only have 1 file, the one u currently parsed
+			kwNode -> fileList = newNode;
+			kwNode -> keyWord = currWord;
+
+			//insert at front of linked list
+			hNode* temp = hashTable[bucket];
+			hashTable[bucket] = kwNode;
+			kwNode -> next = temp;
+			 
+			insertKeyWord(hashTable, 
+		}
+		//word exists as a kw
+		else{
+			//insert node at the front of sub-LL
+			node* temp = kwLLHead -> fileList;
+			kwLLHead -> fileList = newNode;
+			newNode -> next = temp; 
+		}
+	
+		head = head -> next;
+	}
+}
+
 //inserts a single hNode into the hashTable
-void insertHash(hNode** hashTable, hNode* insertMe){
+void insertKeyWord(hNode** hashTable, hNode* insertMe){
 	char* keyWord = insertMe -> keyWord;
 	int bucket = hashFunction(keyWord);
 
