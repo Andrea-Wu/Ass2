@@ -14,10 +14,13 @@ typedef struct node{
 	struct node* next;
 } node;
 
-typedef struct node2{
-	char* word;
-	int count;
-} node2;
+
+//stands for "hash node"
+typedef struct hNode{
+	node* fileList;
+	char* keyWord;
+	struct hNode*  next;
+} hNode;
 	
 
 int tokenize(char* buf, int bufLen, char** wordArr, int wordArrLen);
@@ -26,9 +29,11 @@ node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
 node* removeDuplicates(char** allWords, int len, char* fileName);
 void printLL(node* head);
+void insertHash(hNode** hashTable, hNode* insertMe);
+int hashFunction(char* str);
 
 int main(int argc, char* argv[]){
-
+	/*
 	//testing removeDuplicates()
 	char** testArr = (char**)malloc(10 * sizeof(char*));
 	
@@ -51,10 +56,66 @@ int main(int argc, char* argv[]){
 	printLL(head);
 
 	//end testing removeDuplicates()
+	*/
+
+
+	//testing insertHash
+	//an array of hNode* 
+	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 10000);
+
+	hNode* test = (hNode*)malloc(sizeof(hNode));
+	test -> fileList = NULL;
 	
-	
+	insertHash(hashTable, NULL);
+
+	//end testing inserrtHash
+
 
 	return 0;
+}
+
+//inserts a single hNode into the hashTable
+void insertHash(hNode** hashTable, hNode* insertMe){
+	char* keyWord = insertMe -> keyWord;
+	int bucket = hashFunction(keyWord);
+
+	//gets linked list present at hashtable[bucket]
+	hNode* head = *(hashTable + bucket);
+
+	//if there's no LL
+	if(head == NULL){
+		*(hashTable + bucket) = insertMe;
+		return;
+	}
+	//else
+	hNode* temp;
+	while(head != NULL){
+		temp = head;
+		head = head -> next;
+	}
+
+	//when inserting, just append to end of list...will merge sort later
+	temp -> next = insertMe;
+
+}
+
+
+//this is a shitty & temp hash function
+//we will change it later depending on how many buckets we want,
+//or if we make the hashmap resizable
+int hashFunction(char* str){
+	int strLen = strlen(str);
+
+	//smallest word is "a", which is -97
+	int bucket = -97;	
+
+	int i = 0;
+	while(i < strLen){
+		bucket = bucket + str[i];
+	}
+
+	bucket = bucket % 1000;
+	return bucket;
 }
 
 void sort(char** allStrings, int wordCount){
