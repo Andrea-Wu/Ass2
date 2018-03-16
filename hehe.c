@@ -3,6 +3,23 @@
 #include <string.h>
 #include <ctype.h>
 
+
+//indecisive about whether to make this 1 or 2 different types of node
+//cuz technically they're the same structure
+//although considering the extremely fucked up way i implemented this, 
+//i'll probably need like 3 different kinds of node
+typedef struct node{
+	char* str;
+	int count;
+	node* next;
+} node;
+
+typedef struct node2{
+	char* word;
+	int count;
+} node2
+	
+
 int tokenize(char* buf, int bufLen, char** wordArr, int wordArrLen);
 void clearBuffer(char* str, int len);
 
@@ -30,11 +47,64 @@ void sort(char** allStrings, int wordCount){
 	}
 }
 
-void removeDuplicates(){
+void removeDuplicates(char** allWords, int len, char* filename){
+	//len = length of array
 	//assume that the array that's passed in is already sorted
 	
+	//algorithm: for every position, check how many dupes come after
+	//need 2 pointers: 1 for original and 1 to keep track of dupes
+	//need 2 counters, 1 to keep track of arr pos and 1 to keep track 
+	//of the number of words
+	//store counted words & the count in a linked list. 
+	//this reminds me of expression eval for some reason
+	
+	int i = 0;
+
+	node head = NULL;
+
+	//every unique word gets an iteration of the while loop
+	while(i < len){
+
+		//IMPORTANT: this might break something b/c string not malloced?
+		char* word = allWords[i];
+		int count = 1;
+		int temp = i + 1;
+
+		//obviously some arr out of bounds will happen
+		//when i = len-1
+		while( temp < len && strcmp(word, allWords[temp]) == 0){
+			count++;
+			temp++;
+		}		
+		
+		//while loop ends when there's a diffrent word
+		i = temp;
+
+		//puts nodes in Linked List
+		if(head == NULL){
+			
+		}
+				
+
+	}
 	
 	
+	
+}
+
+node* createNode(char* str, int count, node* next){
+	
+	//create permanent string
+	int strLen = strlen(str);
+	char* newStr= (char*)malloc((strLen+ 1) * sizeof(char));
+	strcpy(newStr, str);
+
+	node* newNode = (node*)malloc(sizeof(node));
+	newNode -> str = newStr;
+	newNode -> count = count;
+	newNode -> next = next;
+	
+	return newNode;
 	
 }
 
