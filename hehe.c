@@ -11,23 +11,50 @@
 typedef struct node{
 	char* str;
 	int count;
-	node* next;
+	struct node* next;
 } node;
 
 typedef struct node2{
 	char* word;
 	int count;
-} node2
+} node2;
 	
 
 int tokenize(char* buf, int bufLen, char** wordArr, int wordArrLen);
 void clearBuffer(char* str, int len);
-
+node* createNode(char* str, int count, node* next);
+void sort(char** allStrings, int wordCount);
+node* removeDuplicates(char** allWords, int len, char* fileName);
+void printLL(node* head);
 
 int main(int argc, char* argv[]){
-	printf("%s\n", argv[0]);
 
+	//testing removeDuplicates()
+	char** testArr = (char**)malloc(10 * sizeof(char*));
 	
+	int i = 0;
+	while(i < 10){
+		testArr[i] = (char*)malloc(20 * sizeof(char));
+
+		i++;
+	}
+
+	for(i = 0; i < 5; i++){
+		testArr[i] = "helo";
+	}
+
+	for(i = 5; i < 10; i++){
+		testArr[i] = "worl";
+	}
+
+	node* head = removeDuplicates(testArr, 10, "file.txt");
+	printLL(head);
+
+	//end testing removeDuplicates()
+	
+	
+
+	return 0;
 }
 
 void sort(char** allStrings, int wordCount){
@@ -47,7 +74,7 @@ void sort(char** allStrings, int wordCount){
 	}
 }
 
-void removeDuplicates(char** allWords, int len, char* filename){
+node* removeDuplicates(char** allWords, int len, char* fileName){
 	//len = length of array
 	//assume that the array that's passed in is already sorted
 	
@@ -60,7 +87,8 @@ void removeDuplicates(char** allWords, int len, char* filename){
 	
 	int i = 0;
 
-	node head = NULL;
+	node* head = NULL;
+	node* tempNode;
 
 	//every unique word gets an iteration of the while loop
 	while(i < len){
@@ -77,18 +105,23 @@ void removeDuplicates(char** allWords, int len, char* filename){
 			temp++;
 		}		
 		
-		//while loop ends when there's a diffrent word
+		//incrementation, basically 
 		i = temp;
 
 		//puts nodes in Linked List
 		if(head == NULL){
-			
+			head = createNode(word, count, NULL);
+			tempNode = head;		
+		}else{
+			node* newNode = createNode(word, count, NULL);
+			tempNode -> next = newNode;
+			tempNode = tempNode -> next;	
 		}
 				
 
 	}
-	
-	
+
+	return head;
 	
 }
 
@@ -192,6 +225,14 @@ void clearBuffer(char* str, int len){
 	int i;
 	for(i = 0; i < len; i++){
 		str[i] = '\0';
+	}
+}
+
+void printLL(node* head){ //for testing only
+	node* temp = head;
+	while(temp != NULL){
+		printf("str is %s, count is %d\n", temp -> str, temp -> count); 
+		temp = temp -> next;
 	}
 }
 
