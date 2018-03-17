@@ -40,35 +40,6 @@ int main(int argc, char* argv[]){
 
 	//hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 	
-/* error test for mergeSortRecords()
-	node* first = (node*)malloc(sizeof(node));
-	 node* second = (node*)malloc(sizeof(node));
-	 node* third = (node*)malloc(sizeof(node));
-	 node* fourth = (node*)malloc(sizeof(node));
-	 node* fifth = (node*)malloc(sizeof(node));
-
-	first -> count = 100;
-	second -> count = 100;
-	third -> count = 100;
-	fourth -> count = 50;
-	fifth -> count = 50;
-
-	first -> str = "and";
-	second -> str = "she";
-	third -> str = "win";
-	fourth -> str = "fan";
-	fifth -> str = "sid";
-
-	first -> next = second;
-	second -> next = third;
-	third -> next = fourth;
-	fourth -> next = fifth;
-	fifth -> next = NULL;
-
-	node* hed = mergeSortRecords(first);
-	printLL(hed);
-	*/
-
 	return 0;
 }
 
@@ -89,7 +60,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 		//create new node to insert into sub-LL		
 		node* newNode = createNode(fn, head -> count, NULL);
 
-	// the following code inserts into sub-LL
+	// the followsng code inserts into sub-LL
 		char* currWord = head -> str;
 		int bucket = hashFunction(currWord);
 
@@ -117,10 +88,29 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 		}
 		//word exists as a kw
 		else{
-			//insert node at the front of sub-LL
-			node* temp = kwLLHead -> fileList;
-			kwLLHead -> fileList = newNode;
-			newNode -> next = temp; 
+			//word might already exists in different file with same name
+			//then just increment count. 
+			//iterate thru list to find out!!
+			//this is highly inefficient b/c i'm already iterating thru list,
+			//	might as well just sort it?? lmao rip merge sort. later 
+
+			node* recordListHead = kwLLHead -> fileList;
+			node* recordList= kwLLHead -> fileList; //iterator
+			
+			while(strcmp(recordList -> str, fileName) != 0 && recordList != NULL){
+				recordList = recordList -> next;
+			}
+			if(recordList == NULL){ //this filename doesn't exist in record List
+				//add to front of list
+				
+				kwLLHead -> fileList = newNode;
+				newNode -> next = recordListHead;
+			}
+			else{ //filename exists in record List, where recordList is desired node 
+				//increment count. 
+				int addMe = newNode -> count;
+				recordList -> count = (recordList -> count) + addMe;
+			}
 		}
 	
 		head = head -> next;
