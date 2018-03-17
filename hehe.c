@@ -28,17 +28,44 @@ void clearBuffer(char* str, int len);
 node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
 node* removeDuplicates(char** allWords, int len, char* fileName);
+void printHLL(hNode* head);
 void printLL(node* head);
 void insertKeyWord(hNode** hashTable, hNode* insertMe);
 int hashFunction(char* str);
+hNode* mergeSortKw(hNode* head);
 
 int main(int argc, char* argv[]){
 	
 	//hashTable is an array of Linked Lists 
-	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
+	//hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
+
+	hNode* first = (hNode*)malloc(sizeof(hNode));
+	hNode* second = (hNode*)malloc(sizeof(hNode));
+	hNode* third = (hNode*)malloc(sizeof(hNode));
+	hNode* fourth = (hNode*)malloc(sizeof(hNode));
+	hNode* fifth = (hNode*)malloc(sizeof(hNode));
 
 
-	
+	first -> keyWord = (char*)malloc(sizeof(char) * 10);
+	second -> keyWord = (char*)malloc(sizeof(char) * 10);
+	third -> keyWord = (char*)malloc(sizeof(char) * 10);
+	fourth -> keyWord = (char*)malloc(sizeof(char) * 10);
+	fifth -> keyWord = (char*)malloc(sizeof(char) * 10);
+
+	first -> keyWord = "first";
+	second -> keyWord = "second";
+	third -> keyWord = "third";
+	fourth -> keyWord = "fourth";
+	fifth -> keyWord = "bobSaget";
+
+	first -> next = second;
+	second -> next = third;
+	third -> next = fourth;
+	fourth -> next = fifth;
+	fifth -> next = NULL;
+
+	hNode* hed = mergeSortKw(first);
+	printHLL(hed);
 
 	return 0;
 }
@@ -49,8 +76,6 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 	//and then insert that into the sub-LL (I just made up a word)
 	//just occurred to me that I'm inserting my nodes at the end of LL but it
 	//but it's more efficient to insert in the front. later
-	
-	node* newHead = NULL;
 	
 	while(head != NULL){
 		//copy fileName into permanent string
@@ -87,8 +112,6 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 			hNode* temp = hashTable[bucket];
 			hashTable[bucket] = kwNode;
 			kwNode -> next = temp;
-			 
-			insertKeyWord(hashTable, 
 		}
 		//word exists as a kw
 		else{
@@ -103,6 +126,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 }
 
 //inserts a single hNode into the hashTable
+//this function is no longer necessary
 void insertKeyWord(hNode** hashTable, hNode* insertMe){
 	char* keyWord = insertMe -> keyWord;
 	int bucket = hashFunction(keyWord);
@@ -325,6 +349,99 @@ void printLL(node* head){ //for testing only
 		temp = temp -> next;
 	}
 }
+
+
+void printHLL(hNode* head){ //for testing only
+        hNode* temp = head;
+        while(temp != NULL){
+                printf("str is %s\n", temp -> keyWord);
+                temp = temp -> next;
+        }
+}
+
+
+//takes in hNode head
+//returns sorted hNode head
+hNode* mergeSortKw(hNode* head){
+	
+	//base case
+	if(head == NULL || head -> next == NULL){
+		return head;
+	}
+
+	//split LL by iterating thru list with 2 ptrs, 
+	//ptr2 2x faster than ptr1
+	//temp trails behind ptr1 so we can properly split the LLs
+		//by setting temp -> next = NULL
+	hNode* temp;
+	hNode* ptr1 = head;
+	hNode* ptr2 = head;
+	while(ptr2 != NULL && ptr2-> next != NULL){
+		temp = ptr1;
+		ptr1 = ptr1 -> next;
+		ptr2 = ptr2 -> next -> next;
+	}
+
+	//detatch the 2 LLs
+	temp -> next = NULL;
+
+	//if odd # of nodes, the right side LL will have 1 extra node
+	//head points to left LL, ptr1 points to right LL
+	
+	//recursively merge sort each side.
+	ptr1 = mergeSortKw(ptr1);
+	head = mergeSortKw(head);
+
+
+	//merge ptr1 and head together
+	hNode* newHead = NULL;
+	hNode* newTemp;
+	while(head != NULL && ptr1 != NULL){ 
+		char* lString = head -> keyWord;
+		char* rString = ptr1 -> keyWord;
+
+		int cmp = strcmp(lString, rString);
+		if(cmp < 0){ 
+			//lString less than rString 
+			//aka lString comes before rString in oxford dictionary
+			if(newHead == NULL){
+				newHead = head;
+				newTemp = newHead;
+				head = head -> next;
+				newHead -> next = NULL;	
+			}else{
+				newTemp -> next = head;
+				head = head -> next;
+				newTemp = newTemp -> next;
+				newTemp -> next = NULL;
+			}
+		}else if(cmp > 0){ //rString comes before lString in dict. 
+			if(newHead == NULL){
+				newHead = ptr1;
+				newTemp = newHead;
+				ptr1 = ptr1 -> next;
+				newHead -> next = NULL;
+			}else{
+				newTemp -> next = ptr1;
+				ptr1 = ptr1 -> next;
+				newTemp = newTemp -> next;
+				newTemp -> next = NULL;
+			}
+		} 
+
+	}
+
+	//append leftovers to end of list
+	if(head != NULL){
+		newTemp -> next = head;
+	}else if(ptr1 != NULL){
+		newTemp -> next = ptr1;
+	}
+
+	return newHead;	
+}
+
+
 
 
 
