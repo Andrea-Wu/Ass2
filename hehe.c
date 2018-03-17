@@ -33,30 +33,31 @@ void printLL(node* head);
 void insertKeyWord(hNode** hashTable, hNode* insertMe);
 int hashFunction(char* str);
 hNode* mergeSortKw(hNode* head);
+node* mergeSortRecords(node* head);
 
 int main(int argc, char* argv[]){
 	
-	//hashTable is an array of Linked Lists 
+
 	//hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
+	
+/* error test for mergeSortRecords()
+	node* first = (node*)malloc(sizeof(node));
+	 node* second = (node*)malloc(sizeof(node));
+	 node* third = (node*)malloc(sizeof(node));
+	 node* fourth = (node*)malloc(sizeof(node));
+	 node* fifth = (node*)malloc(sizeof(node));
 
-	hNode* first = (hNode*)malloc(sizeof(hNode));
-	hNode* second = (hNode*)malloc(sizeof(hNode));
-	hNode* third = (hNode*)malloc(sizeof(hNode));
-	hNode* fourth = (hNode*)malloc(sizeof(hNode));
-	hNode* fifth = (hNode*)malloc(sizeof(hNode));
+	first -> count = 100;
+	second -> count = 100;
+	third -> count = 100;
+	fourth -> count = 50;
+	fifth -> count = 50;
 
-
-	first -> keyWord = (char*)malloc(sizeof(char) * 10);
-	second -> keyWord = (char*)malloc(sizeof(char) * 10);
-	third -> keyWord = (char*)malloc(sizeof(char) * 10);
-	fourth -> keyWord = (char*)malloc(sizeof(char) * 10);
-	fifth -> keyWord = (char*)malloc(sizeof(char) * 10);
-
-	first -> keyWord = "first";
-	second -> keyWord = "second";
-	third -> keyWord = "third";
-	fourth -> keyWord = "fourth";
-	fifth -> keyWord = "bobSaget";
+	first -> str = "and";
+	second -> str = "she";
+	third -> str = "win";
+	fourth -> str = "fan";
+	fifth -> str = "sid";
 
 	first -> next = second;
 	second -> next = third;
@@ -64,8 +65,9 @@ int main(int argc, char* argv[]){
 	fourth -> next = fifth;
 	fifth -> next = NULL;
 
-	hNode* hed = mergeSortKw(first);
-	printHLL(hed);
+	node* hed = mergeSortRecords(first);
+	printLL(hed);
+	*/
 
 	return 0;
 }
@@ -345,7 +347,7 @@ void clearBuffer(char* str, int len){
 void printLL(node* head){ //for testing only
 	node* temp = head;
 	while(temp != NULL){
-		printf("str is %s, count is %d\n", temp -> str, temp -> count); 
+		printf("str is %s, count is %d\n",temp -> str ,temp -> count); 
 		temp = temp -> next;
 	}
 }
@@ -441,6 +443,112 @@ hNode* mergeSortKw(hNode* head){
 	return newHead;	
 }
 
+//copied code from prev mergesort but with modifications
+node* mergeSortRecords(node* head){ 
+	//base case
+	if(head == NULL || head -> next == NULL){
+                return head;
+        }
+	//split LL by iterating thru list with 2 ptrs,
+	//ptr2 2x faster than ptr1
+	//temp trails behind ptr1 so we can properly split the LLs
+	//by setting temp -> next = NULL
+                             
+	node* temp;
+        node* ptr1 = head;
+        node* ptr2 = head;
+        while(ptr2 != NULL && ptr2 -> next != NULL){
+                temp = ptr1;
+                ptr1 = ptr1 -> next;
+                ptr2 = ptr2 -> next -> next;
+        }
+
+	//detatch the 2 LLs
+	temp -> next = NULL;
+	         
+	//if odd # of nodes, the right side LL will have 1 extra node
+	//head points to left LL, ptr1 points to right LL
+	
+	//recursively merge sort each side.
+	ptr1 = mergeSortRecords(ptr1);
+        head = mergeSortRecords(head);
+
+	//merge ptr1 and head together
+	node* newHead = NULL;
+        node* newTemp;
+        while(head != NULL && ptr1 != NULL){
+                int lFreq = head -> count;
+                int rFreq = ptr1 -> count;
+
+                if(lFreq > rFreq){
+                       if(newHead == NULL){
+                                newHead = head;
+                                newTemp = newHead;
+                                head = head -> next;
+                                newHead -> next = NULL;
+                        }else{
+                                newTemp -> next = head;
+                                head = head -> next;
+                                newTemp = newTemp -> next;
+                                newTemp -> next = NULL;
+                        }
+                }else if(rFreq > lFreq){
+	                if(newHead == NULL){
+                                newHead = ptr1;
+                                newTemp = newHead;
+                                ptr1 = ptr1 -> next;
+                                newHead -> next = NULL;
+                        }else{
+                                newTemp -> next = ptr1;
+                                ptr1 = ptr1 -> next;
+                                newTemp = newTemp -> next;
+                                newTemp -> next = NULL;
+                        }
+                }else if(rFreq == lFreq){ //both equal, then sort by fileName
+			char* lString = head -> str;
+			char* rString = ptr1 -> str;
+			
+			int cmp = strcmp(lString, rString);
+			if(cmp < 0){ //iterate head
+				if(newHead == NULL){
+                               		newHead = head;
+                                	newTemp = newHead;
+                                	head = head -> next;
+                                	newHead -> next = NULL;
+                        	}else{
+                                	newTemp -> next = head;
+                                	head = head -> next;
+                                	newTemp = newTemp -> next;
+                                	newTemp -> next = NULL;
+                        	}
+			}else if(cmp > 0){ //iterate ptr1
+				if(newHead == NULL){
+                                	newHead = ptr1;
+                                	newTemp = newHead;
+                                	ptr1 = ptr1 -> next;
+                                	newHead -> next = NULL;
+                        	}else{
+                                	newTemp -> next = ptr1;
+                                	ptr1 = ptr1 -> next;
+                                	newTemp = newTemp -> next;
+                                	newTemp -> next = NULL;
+                        	}		
+			}else if(cmp == 0){
+				printf("this shouldn't happen\n");
+			}			
+		}
+        }
+
+	//append leftovers
+ 	if(head != NULL){
+                newTemp -> next = head;
+        }else if(ptr1 != NULL){
+                newTemp -> next = ptr1;
+        }
+
+        return newHead;
+
+}
 
 
 
