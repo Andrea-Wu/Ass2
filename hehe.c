@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <dirent.h>
 
 
 //indecisive about whether to make this 1 or 2 different types of node
@@ -22,34 +23,139 @@ typedef struct hNode{
 	struct hNode*  next;
 } hNode;
 	
-
-int tokenize(char* buf, int bufLen, char** wordArr, int wordArrLen);
+int tokenize(char* fileName, char** wordArr);
 void clearBuffer(char* str, int len);
 node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
-node* removeDuplicates(char** allWords, int len, char* fileName);
+node* removeDuplicates(char** allWords, int len);
 void printHLL(hNode* head);
 void printLL(node* head);
 void insertKeyWord(hNode** hashTable, hNode* insertMe);
+void traverseDir(hNode** hashTable, char* path);
+void insertRecords(hNode** hashTable, node* head, char* fileName);
 int hashFunction(char* str);
+
 hNode* mergeSortKw(hNode* head);
 node* mergeSortRecords(node* head);
 
 int main(int argc, char* argv[]){
+	//an array of hash nodes
 	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 
+	traverseDir(hashTable, argv[2]);
 
+	//all of the required data is now in the hash table
+	//time to print everything out!
+		
+	//remove all of the nodes from the hash table and turn into a LL
+	hNode* head = NULL;
+	hNode* temp;
+	int i = 0;
+	while(i < 1000){
+		if(hashTable[i] != NULL){
+
+			//concat to LL
+			if(head == NULL){
+				head = hashTable[i];
+				temp = head;
+			}else{
+				temp -> next = hashTable[i];
+			}
+			//cmon what's the corner case
+			if(temp == NULL){
+				printf("whoops, corner case...should not happen");
+				break;
+			}
+
+			//iterate until temp reaches end, so we can concat to the end next time
+			while(temp -> next != NULL){
+				temp = temp -> next;
+			}	
+		}
+		i++;
+	}
+
+	head = mergeSortKw(head); 
+
+	//now all the kws are in the correct order
+	//for every keyword, merge sort sub-LL
+	//this isn't necessary if we sort while inserting, change lateri
+	//
+	//IMPORTANT FREE EVERYTHING
 	
+
+	FILE* writeFp = fopen(argv[1], "w");
+
+	char xml[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+	fwrite(xml, sizeof(char), strlen(xml), writeFp);
+
+	char fileIndex[] = "<fileIndex>";
+	fwrite(fileIndex, sizeof(char), strlen(fileIndex), writeFp);
+	
+	//FOR FREE
+	//hNode* freeLaterHead = head;
+
+	while(head != NULL){
+		char* kw = head -> keyWord;
+
+		//write the xml thing to a file
+		//final line of text will be stored in openWordText
+		
+		char* openWordText = "<word text=\"";
+		char* closeWordText = "\">\n";		
+
+		strcat(openWordText, kw);
+		strcat(openWordText, closeWordText);
+
+		fwrite(openWordText, sizeof(char), strlen(openWordText), writeFp);
+		
+		node* fileList = head -> fileList;
+
+		//FOR FREE
+		//node* fileListHead = fileList;
+		fileList = mergeSortRecords(fileList);
+		
+		//print fileList as XML to file
+		while(fileList != NULL){
+			char* str = fileList -> str;
+			int count = fileList -> count;
+
+			char* frag1= "file name=\"";
+			char* frag2 = "\">";
+			char* frag3 = "</file>\n";
+
+			char countStr[20];
+			sprintf(countStr, "%d", count);
+
+			strcat(frag1, str);
+			strcat(frag1, frag2);
+			strcat(frag1, countStr);
+			strcat(frag1, frag3);
+			 
+			fwrite(frag1, sizeof(char), strlen(frag1), writeFp);
+
+			fileList = fileList -> next;
+		}
+
+		char* word = "</word>\n";
+		fwrite(word, sizeof(char), strlen(word), writeFp);
+		
+		
+		head = head -> next;
+	}
+
+	char closeFI[] = "</fileIndex>\n";
+	fwrite(closeFI, sizeof(char), strlen(closeFI), writeFp);	
 	
 	return 0;
 }
 
 //ERRNO
-int traverseDir(hNode** hashTable, char* fileName){
+void traverseDir(hNode** hashTable, char* path){
 	DIR* dirp;
 	struct dirent* dp;
 	char child[PATH_MAX]; //idk what path_max is 
-	if(!(dirp = openDir(path))){ //this is file or not valid name
+	if(!(dirp = opendir(path))){ //this is file or not valid name
 		//pretend all files are valid...
 		//fix later
 		
@@ -58,16 +164,38 @@ int traverseDir(hNode** hashTable, char* fileName){
 		
 	}else{ //is directory
 		
-		while((dp = readdir(dirp)) != NULL){ 
+		while((dp = readdir(dirp)) != NULL){
+
+ 			//concat path & subdir name
+                        snprintf(child, PATH_MAX, "%s%s", path, dp -> d_name);
+                                  
 			if(dp -> d_type == DT_REG){ //is regular file
+				//create array pointer and tokenize into array
+				//the tokenize() function does the mallocing
+				char** wordArr = NULL;
+
+				//pass by pointer? hopefully this works
+				int numWords = tokenize(child,wordArr);
+				
+				//should have put an unsorted array into wordArr
+				//sort.
+				sort(wordArr, numWords);
+
+				//sorted list has duplicates. remove. turn into linked list.
+				node* head = removeDuplicates(wordArr, numWords);
+
+				//insert each node into the master linked list
+				insertRecords(hashTable, head, dp -> d_name);
+			
 				
 			}else if(dp -> d_type == DT_DIR){ //this is dir
+
 				//concat path & subdir name
-				snprintf(child, PATH_MAX, %s%s, path, dp -> d_name);
+				snprintf(child, PATH_MAX, "%s%s", path, dp -> d_name);
 				
 				//recurse on subdirectory, except . and ..
 				if(strcmp(dp -> d_name, ".") != 0 && strcmp(dp ->d_name, "..") != 0){
-					traverseDir(child);
+					traverseDir(hashTable,child);
 				}
 			}else{
 				printf("what the fresh fuck");
@@ -215,7 +343,7 @@ void sort(char** allStrings, int wordCount){
 	}
 }
 
-node* removeDuplicates(char** allWords, int len, char* fileName){
+node* removeDuplicates(char** allWords, int len){
 	//len = length of array
 	//assume that the array that's passed in is already sorted
 	
@@ -282,83 +410,40 @@ node* createNode(char* str, int count, node* next){
 	
 }
 
-int tokenize(char* buf, int bufLen, char** wordArr, int wordArrLen){ 
+int tokenize(char* fileName, char** wordArr){ 
 	//takes in complete file text, file text length,
 	//an array which to place an unsorted list of words, 
 	//and the original length of that array. 
 	//returns the size of the full array
 	
-	
-	//IMPORTANT: if this ends up seg faulting,
-	//it's probably because strcpy() is creating ptrs to strings
-	//that are being destroyed when the function is returned 
-	//(i'm not sure how strcpy works, maybe this will not happen)
-	//test this theory out...later
+	//IMPORTANT: might have to concat path...
+	FILE* fp = fopen(fileName, "r");
 	
 	int wordCount = 0;
+	int maxWordCount = 100;
+	wordArr = (char**)malloc(sizeof(char*) * maxWordCount);
 
-	//assume this stuff is already done in another function
-	//int wordArrLen = 20;
-	//char** wordArr = (char**)malloc(sizeof(char**) * wordArrLen);
-	
-	int len = 0;
-	int tokenBufLen = 20; //number of available spaces in tokenBuf
-	char* tokenBuf = (char*)malloc(tokenBufLen* sizeof(char));
+	while(1){
+		fscanf(fp, "%s", wordArr[wordCount]);
 
-
-	int prevIsLetter = 0; //keep track of repeating delims
-
-	int i;
-	for(i = 0; i < bufLen; i++){
-	
-		//checks if char is letter
-		if(isalpha(buf[i])){
-			tokenBuf[len] = buf[i];
-
-			//if word len approaches amount of space allocated
-			if(len > tokenBufLen -2){
-				tokenBufLen = tokenBufLen + 100;
-				tokenBuf = (char*)realloc(tokenBuf, sizeof(char) * tokenBufLen);
-			}
-
-			prevIsLetter = 1;
-			len = len + 1;
-		}
-
-		//char is not letter, word complete
-		else{
-			if(prevIsLetter == 0){
-				continue;
-			}
-
-			char* newString = (char*)malloc(sizeof(char) * (len + 1));
-
-			//strcpy buffer to permanent location
-			newString = strcpy(newString, tokenBuf);
-			wordArr[wordCount] = newString;
-
-			//deal with resizing
-			if(wordCount > wordArrLen - 2){
-				wordArrLen = wordArrLen + 100;
-				wordArr = (char**)realloc(wordArr, sizeof(char*) * wordArrLen);
-			}
-
-			len = 0;
-
-			clearBuffer(tokenBuf, tokenBufLen);
-			prevIsLetter = 0;
-			wordCount++;
-		}
-	}
-
-	if(prevIsLetter == 1){
-		char* newString = (char*)malloc(sizeof(char) * (len+1));
-		newString = strcpy(newString, tokenBuf);
-		wordArr[wordCount] = newString;
 		wordCount++;
-	}
 
+		//"don't use array that has been realloced"
+		if(wordCount == maxWordCount -2){
+			maxWordCount = maxWordCount * 2;
+			wordArr = (char**)realloc(wordArr ,sizeof(char*) * maxWordCount);
+		}		
+
+		if(feof(fp)){
+			break;
+		}
+	}
+	
 	return wordCount;
+
+	
+
+
 }
 
 
