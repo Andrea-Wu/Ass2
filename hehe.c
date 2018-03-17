@@ -36,11 +36,46 @@ hNode* mergeSortKw(hNode* head);
 node* mergeSortRecords(node* head);
 
 int main(int argc, char* argv[]){
-	
+	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 
-	//hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
+
+	
 	
 	return 0;
+}
+
+//ERRNO
+int traverseDir(hNode** hashTable, char* fileName){
+	DIR* dirp;
+	struct dirent* dp;
+	char child[PATH_MAX]; //idk what path_max is 
+	if(!(dirp = openDir(path))){ //this is file or not valid name
+		//pretend all files are valid...
+		//fix later
+		
+		
+
+		
+	}else{ //is directory
+		
+		while((dp = readdir(dirp)) != NULL){ 
+			if(dp -> d_type == DT_REG){ //is regular file
+				
+			}else if(dp -> d_type == DT_DIR){ //this is dir
+				//concat path & subdir name
+				snprintf(child, PATH_MAX, %s%s, path, dp -> d_name);
+				
+				//recurse on subdirectory, except . and ..
+				if(strcmp(dp -> d_name, ".") != 0 && strcmp(dp ->d_name, "..") != 0){
+					traverseDir(child);
+				}
+			}else{
+				printf("what the fresh fuck");
+			}
+		}
+	}
+
+	closedir(dirp);
 }
 
 void insertRecords(hNode** hashTable, node* head, char* fileName){
