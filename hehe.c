@@ -40,6 +40,11 @@ node* mergeSortRecords(node* head);
 
 int main(int argc, char* argv[]){
 	//an array of hash nodes
+	
+	if(argv[1] == NULL || argv[2] == NULL){
+		printf("invalid input\n");
+		return 1;
+	}
 	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 
 	traverseDir(hashTable, argv[2]);
@@ -101,8 +106,8 @@ int main(int argc, char* argv[]){
 		//write the xml thing to a file
 		//final line of text will be stored in openWordText
 		
-		char* openWordText = "<word text=\"";
-		char* closeWordText = "\">\n";		
+		char openWordText[] = "<word text=\"";
+		char closeWordText[] = "\">\n";		
 
 		strcat(openWordText, kw);
 		strcat(openWordText, closeWordText);
@@ -118,11 +123,21 @@ int main(int argc, char* argv[]){
 		//print fileList as XML to file
 		while(fileList != NULL){
 			char* str = fileList -> str;
+
+			//if this breaks, strcpy into mutable array
+			
+			char* strcopy = (char*)malloc(sizeof(char) * (strlen(str)+1));
+			strcpy(strcopy, str);	
+			
+
 			int count = fileList -> count;
 
-			char* frag1= "file name=\"";
-			char* frag2 = "\">";
-			char* frag3 = "</file>\n";
+			char frag1[] = "file name=\"";
+			char frag2[] = "\">";
+			char frag3[] = "</file>\n";
+
+			//assume the number won't be more than 20 digits...
+			//...10 quintillion
 
 			char countStr[20];
 			sprintf(countStr, "%d", count);
@@ -172,7 +187,7 @@ void traverseDir(hNode** hashTable, char* path){
 			if(dp -> d_type == DT_REG){ //is regular file
 				//create array pointer and tokenize into array
 				//the tokenize() function does the mallocing
-				char** wordArr = NULL;
+				char** wordArr = (char**)malloc(sizeof(char*) * 100);
 
 				//pass by pointer? hopefully this works
 				int numWords = tokenize(child,wordArr);
@@ -232,7 +247,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 
 			//gets hNode corresponding with current keyword
 			//this is linear search...inefficient
-		while(strcmp(kwLLHead -> keyWord, currWord) != 0 && kwLLHead != NULL){
+		while( kwLLHead != NULL && strcmp(kwLLHead -> keyWord, currWord) != 0){
 			kwLLHead = kwLLHead -> next;
 		}
 	
@@ -421,12 +436,18 @@ int tokenize(char* fileName, char** wordArr){
 	
 	int wordCount = 0;
 	int maxWordCount = 100;
-	wordArr = (char**)malloc(sizeof(char*) * maxWordCount);
+	//array already declared...
 
 	while(1){
-		fscanf(fp, "%s", wordArr[wordCount]);
+		char temp[100]; //this is bad. to be fair, fscanf is also bad
+		fscanf(fp, "%s", temp);
+		
+		wordArr[wordCount] = (char*)malloc(sizeof(char) * (strlen(temp)+1));
 
+		strcpy(wordArr[wordCount], temp);
 		wordCount++;
+
+		
 
 		//"don't use array that has been realloced"
 		if(wordCount == maxWordCount -2){
