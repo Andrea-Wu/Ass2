@@ -4,7 +4,10 @@
 #include <dirent.h>
 
 int main(int argc, char* argv[]){
-	
+	char* tet = (char*)malloc(sizeof(char) * 20);
+
+	char* haha = "haha";
+	printf("%c\n", haha[2]);	
 
 	
 }

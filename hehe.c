@@ -91,10 +91,10 @@ int main(int argc, char* argv[]){
 
 	FILE* writeFp = fopen(argv[1], "w");
 
-	char xml[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+	char xml[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	fwrite(xml, sizeof(char), strlen(xml), writeFp);
 
-	char fileIndex[] = "<fileIndex>";
+	char fileIndex[] = "<fileIndex>\n";
 	fwrite(fileIndex, sizeof(char), strlen(fileIndex), writeFp);
 	
 	//FOR FREE
@@ -106,13 +106,40 @@ int main(int argc, char* argv[]){
 		//write the xml thing to a file
 		//final line of text will be stored in openWordText
 		
-		char openWordText[] = "<word text=\"";
+		char openWordText[] = "\t<word text=\"";
 		char closeWordText[] = "\">\n";		
+		
+		//this should be a separate function lol
+		int newKwLen = strlen(kw) + strlen(openWordText) + strlen(closeWordText);
+			
+		char* newKwStr = (char*)malloc(sizeof(char) * (newKwLen + 1));
 
-		strcat(openWordText, kw);
-		strcat(openWordText, closeWordText);
+		int itr = 0;	
+		int ITR = 0;
 
-		fwrite(openWordText, sizeof(char), strlen(openWordText), writeFp);
+		while(itr < strlen(openWordText)){
+			newKwStr[itr] = openWordText[itr];
+			itr++;
+			ITR++;
+		}
+
+
+		itr = 0;
+                while(itr < strlen(kw)){
+                        newKwStr[ITR] = kw[itr];
+                        itr++;
+                        ITR++;
+                }
+
+		itr = 0;
+                while(itr < strlen(closeWordText)){
+                        newKwStr[ITR] = closeWordText[itr];
+                        itr++;
+                        ITR++;
+                }
+		
+
+		fwrite(newKwStr, sizeof(char), strlen(newKwStr), writeFp);
 		
 		node* fileList = head -> fileList;
 
@@ -124,15 +151,9 @@ int main(int argc, char* argv[]){
 		while(fileList != NULL){
 			char* str = fileList -> str;
 
-			//if this breaks, strcpy into mutable array
-			
-			char* strcopy = (char*)malloc(sizeof(char) * (strlen(str)+1));
-			strcpy(strcopy, str);	
-			
-
 			int count = fileList -> count;
 
-			char frag1[] = "file name=\"";
+			char frag1[] = "\t\t<file name=\"";
 			char frag2[] = "\">";
 			char frag3[] = "</file>\n";
 
@@ -142,17 +163,55 @@ int main(int argc, char* argv[]){
 			char countStr[20];
 			sprintf(countStr, "%d", count);
 
-			strcat(frag1, str);
-			strcat(frag1, frag2);
-			strcat(frag1, countStr);
-			strcat(frag1, frag3);
-			 
-			fwrite(frag1, sizeof(char), strlen(frag1), writeFp);
+			//malloc a string that's big enough
+			int newLen = strlen(str) + strlen(countStr) + strlen(frag1) \
+					+ strlen(frag2) + strlen(frag3);	
+	
+			char* newStr = (char*)malloc(sizeof(char) *(newLen + 1));
+			
+			int IT = 0;	
+			int it = 0;
+			while(it < strlen(frag1)){
+				newStr[it] = frag1[it];
+				it++;
+				IT++;
+			}
+		
+			it = 0;
+			while(it < strlen(str)){
+				newStr[IT] = str[it];
+				it++;
+				IT++;
+			} 
+	
+                        it = 0;
+                        while(it < strlen(frag2)){
+                                newStr[IT] = frag2[it];
+				it++;
+				IT++;
+                        }
+			
+			
+                        it = 0;
+                        while(it < strlen(countStr)){
+                                newStr[IT] = countStr[it];
+				it++;
+				IT++;
+                        }
+	
+			it = 0;
+                        while(it < strlen(frag3)){
+                                newStr[IT] = frag3[it];
+                                it++;
+                                IT++;
+                        }
+	 
+			fwrite(newStr, sizeof(char), strlen(newStr), writeFp);
 
 			fileList = fileList -> next;
 		}
 
-		char* word = "</word>\n";
+		char* word = "\t</word>\n";
 		fwrite(word, sizeof(char), strlen(word), writeFp);
 		
 		
