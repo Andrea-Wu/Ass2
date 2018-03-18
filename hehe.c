@@ -334,7 +334,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 			node* recordListHead = kwLLHead -> fileList;
 			node* recordList= kwLLHead -> fileList; //iterator
 			
-			while(strcmp(recordList -> str, fileName) != 0 && recordList != NULL){
+			while(recordList != NULL && strcmp(recordList -> str, fileName) != 0){
 				recordList = recordList -> next;
 			}
 			if(recordList == NULL){ //this filename doesn't exist in record List

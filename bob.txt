@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileIndex>
+	<word text="and">
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="goes">
+		<file name="baa.txt">1</file>
+	</word>
 	<word text="haha">
+		<file name="baa.txt">1</file>
 		<file name="haha.txt">1</file>
 	</word>
 	<word text="hehe">
+		<file name="baa.txt">1</file>
 		<file name="haha.txt">1</file>
 	</word>
 	<word text="hihi">
+		<file name="baa.txt">1</file>
 		<file name="haha.txt">1</file>
 	</word>
 	<word text="hohoho">
 		<file name="haha.txt">1</file>
+	</word>
+	<word text="it">
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="so">
+		<file name="baa.txt">1</file>
 	</word>
 </fileIndex>
