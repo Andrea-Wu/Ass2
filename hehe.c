@@ -500,7 +500,12 @@ int tokenize(char* fileName, char** wordArr){
 	while(1){
 		char temp[100]; //this is bad. to be fair, fscanf is also bad
 		fscanf(fp, "%s", temp);
-		
+	
+		if(feof(fp)){
+                        break;
+                }
+
+			
 		wordArr[wordCount] = (char*)malloc(sizeof(char) * (strlen(temp)+1));
 
 		strcpy(wordArr[wordCount], temp);
@@ -514,9 +519,6 @@ int tokenize(char* fileName, char** wordArr){
 			wordArr = (char**)realloc(wordArr ,sizeof(char*) * maxWordCount);
 		}		
 
-		if(feof(fp)){
-			break;
-		}
 	}
 	
 	return wordCount;

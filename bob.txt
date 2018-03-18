@@ -10,6 +10,6 @@
 		<file name="haha.txt">1</file>
 	</word>
 	<word text="hohoho">
-		<file name="haha.txt">2</file>
+		<file name="haha.txt">1</file>
 	</word>
 </fileIndex>
