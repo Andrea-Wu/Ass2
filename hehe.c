@@ -304,7 +304,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 	
 	while(head != NULL){
 		//copy fileName into permanent string
-		int fnLen = sizeof(fileName);
+		int fnLen = strlen(fileName);
 		char* fn = (char*)malloc((fnLen + 1) * sizeof(char));
 		strcpy(fn, fileName);
 
