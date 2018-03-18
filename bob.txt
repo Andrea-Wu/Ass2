@@ -3,6 +3,9 @@
 	<word text="and">
 		<file name="baa.txt">1</file>
 	</word>
+	<word text="ass">
+		<file name="ass.txt">3</file>
+	</word>
 	<word text="goes">
 		<file name="baa.txt">1</file>
 	</word>

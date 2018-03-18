@@ -1,0 +1,7 @@
+case #1: a single file inside a directory with 3 words
+
+case #2: two files inside a directory without overlapping words
+
+case #3: two files inside a directory with some overlapping words
+
+case #4: 

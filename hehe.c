@@ -241,7 +241,8 @@ void traverseDir(hNode** hashTable, char* path){
 		while((dp = readdir(dirp)) != NULL){
 
  			//concat path & subdir name
-                        snprintf(child, PATH_MAX, "%s%s", path, dp -> d_name);
+                        snprintf(child, PATH_MAX, "%s/%s", path, dp -> d_name);
+			printf("%s\n", child);
                                   
 			if(dp -> d_type == DT_REG){ //is regular file
 				//create array pointer and tokenize into array
@@ -265,7 +266,8 @@ void traverseDir(hNode** hashTable, char* path){
 			}else if(dp -> d_type == DT_DIR){ //this is dir
 
 				//concat path & subdir name
-				snprintf(child, PATH_MAX, "%s%s", path, dp -> d_name);
+				//snprintf(child, PATH_MAX, "%s%s", path, dp -> d_name);
+				//printf("%s\n", child);
 				
 				//recurse on subdirectory, except . and ..
 				if(strcmp(dp -> d_name, ".") != 0 && strcmp(dp ->d_name, "..") != 0){
