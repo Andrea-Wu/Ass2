@@ -231,11 +231,24 @@ void traverseDir(hNode** hashTable, char* path){
 	char child[PATH_MAX]; //idk what path_max is 
 	if(!(dirp = opendir(path))){ //this is file or not valid name
 		//pretend all files are valid...
-		//fix later
-		
-		
+		FILE* fp = fopen(path, "r");
+		if(fp){ //is valid file
+	
+			//close for now, we are only checking if it exists
+			fclose(fp);
+			
+			char** wordArr = (char**)malloc(sizeof(char*) * 100);
+			int numWords = tokenize(path,wordArr);
+			sort(wordArr, numWords);
+			node* head = removeDuplicates(wordArr, numWords);	
+			insertRecords(hashTable, head, path);
 
+		}else{ //invalid file name
+			printf("error: invalid file name\n");			
+		}
 		
+		return;
+
 	}else{ //is directory
 		
 		while((dp = readdir(dirp)) != NULL){
