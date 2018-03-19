@@ -402,8 +402,7 @@ void insertKeyWord(hNode** hashTable, hNode* insertMe){
 int hashFunction(char* str){
 	int strLen = strlen(str);
 
-	//smallest word is "a", which is -97
-	int bucket = -97;	
+	int bucket = 0;	
 
 	int i = 0;
 	while(i < strLen){

@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileIndex>
-	<word text="i">
-		<file name="orange.txt">1</file>
+	<word text="#1:">
+		<file name="testcases.txt">1</file>
 	</word>
-	<word text="like">
-		<file name="orange.txt">1</file>
+	<word text="#2:">
+		<file name="testcases.txt">1</file>
 	</word>
-	<word text="oranges">
-		<file name="orange.txt">1</file>
+	<word text="#3:">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="#4:">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="3">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="a">
+		<file name="testcases.txt">4</file>
+	</word>
+	<word text="case">
+		<file name="testcases.txt">4</file>
+	</word>
+	<word text="directory">
+		<file name="testcases.txt">3</file>
+	</word>
+	<word text="file">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="files">
+		<file name="testcases.txt">2</file>
+	</word>
+	<word text="inside">
+		<file name="testcases.txt">3</file>
+	</word>
+	<word text="overlapping">
+		<file name="testcases.txt">2</file>
+	</word>
+	<word text="single">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="some">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="two">
+		<file name="testcases.txt">2</file>
+	</word>
+	<word text="with">
+		<file name="testcases.txt">2</file>
+	</word>
+	<word text="without">
+		<file name="testcases.txt">1</file>
+	</word>
+	<word text="words">
+		<file name="testcases.txt">3</file>
 	</word>
 </fileIndex>
