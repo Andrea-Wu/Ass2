@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <dirent.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 
 //indecisive about whether to make this 1 or 2 different types of node
@@ -220,7 +222,7 @@ void traverseDir(hNode** hashTable, char* path){
 
 void insertRecords(hNode** hashTable, node* head, char* fileName){
 	//head is an LL with node containing keyword, count, and next.
-	//we have to turn each node into a different node, containing filename, count, and next.
+	//we have to turn each node from head into a different node, containing filename, count, and next.
 	//and then insert that into the sub-LL (I just made up a word)
 	
 	while(head != NULL){
@@ -233,7 +235,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 		//create new node to insert into sub-LL		
 		node* newNode = createNode(fn, head -> count, NULL);
 
-	// the followsng code inserts into sub-LL
+	// the following code inserts into sub-LL
 		char* currWord = head -> str;
 		int bucket = hashFunction(currWord);
 
@@ -392,42 +394,92 @@ node* createNode(char* str, int count, node* next){
 	
 }
 
-int tokenize(char* fileName, char** wordArr){ 
+int tokenize(char* fileName, char** wordArray){ 
 	//takes in complete file text, file text length,
 	//an array which to place an unsorted list of words, 
 	//and the original length of that array. 
 	//returns the size of the full array
 	
 	//IMPORTANT: might have to concat path...
-	FILE* fp = fopen(fileName, "r");
+	int fp = open(fileName, O_RDONLY);
 	
-	int wordCount = 0;
-	int maxWordCount = 100;
 	//array already declared...
 
-	while(1){
-		char temp[100]; //this is bad. to be fair, fscanf is also bad
-		fscanf(fp, "%s", temp);
-	
-		if(feof(fp)){
-                        break;
+//BEGIN MODIFIED CODE FROM ASS0
+        //these variables are for putting separated strings into unsorted array
+        int wordCount = 0;  
+        //initially allow for 100 words before resizing
+        //this array is declared in function that calls it (oops, not modular :/)
+        int wordArrLen = 100; 
+    
+	char* megaBuff = (char*)malloc(sizeof(char*) * 3);
+    
+        //string buffer to read individual words
+        int len = 0; //current word length
+        char* buffer = (char*)malloc(20 * sizeof(char));
+        int buffLength = 20; 
+
+        //keep track of repeating deliminators
+        int prevIsLetter = 0;
+    
+        while(read(fp,megaBuff,sizeof(char))){                                                  
+                //checks if character is a letter
+                if(isalpha(megaBuff[0]) ){							
+                        buffer[len] = megaBuff[0];   					
+
+                        //if word length approaches the amount of space allocated
+                        if(len > buffLength - 3){ 
+                                buffLength = buffLength + 100;
+                                buffer  = (char*)realloc(buffer, sizeof(char) * buffLength);
+                        }
+    
+                        prevIsLetter = 1;
+                        len = len+1;
+                }
+    
+                //char is not letter, word complete.
+                else{
+                        if(prevIsLetter == 0){ 
+                                continue;
+                        }
+    
+
+                        char* newString = (char*)malloc(sizeof(char) * (len+1));
+
+                        //strcpy buffer  to a permanent location
+                        newString = strcpy(newString, buffer);
+    
+                        wordArray[wordCount] = newString;
+
+                        //deal with resizing problems 
+                        if(wordCount > wordArrLen - 3){
+                                wordArrLen = wordArrLen + 100;
+                                wordArray = (char**)realloc(wordArray, sizeof(char*) * wordArrLen);
+                        }
+
+                        len = 0;
+
+                        clearBuffer(buffer, buffLength);
+
+                        prevIsLetter = 0;
+
+                        wordCount++;
                 }
 
-			
-		wordArr[wordCount] = (char*)malloc(sizeof(char) * (strlen(temp)+1));
+        }
 
-		strcpy(wordArr[wordCount], temp);
-		wordCount++;
+        //non-alpha character usually triggers putting word into array
+        //but last word might not end with delim.
+        if(prevIsLetter == 1){
+                char* newString = (char*)malloc(sizeof(char) * (len+1));
+                newString = strcpy(newString,buffer);
+                wordArray[wordCount] = newString;
+                wordCount++;
+        }
 
-		
+//END CODE FROM ASS0
 
-		//"don't use array that has been realloced"
-		if(wordCount == maxWordCount -2){
-			maxWordCount = maxWordCount * 2;
-			wordArr = (char**)realloc(wordArr ,sizeof(char*) * maxWordCount);
-		}		
 
-	}
 	
 	return wordCount;
 
