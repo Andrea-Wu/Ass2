@@ -1,12 +1,1404 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileIndex>
+	<word text="0">
+		<file name="hehe.c">30</file>
+	</word>
+	<word text="1">
+		<file name="hehe.c">26</file>
+	</word>
+	<word text="10">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="100">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="1000">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="2">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="20">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="2x">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="3">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="8">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="ASS0">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="Ass0">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="BEGIN">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="CODE">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="DIR">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="DT">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="END">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="ERRNO">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="EVERYTHING">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="FILE">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="FOR">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="FREE">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="FROM">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="I">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="IMPORTANT">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="LL">
+		<file name="hehe.c">15</file>
+	</word>
+	<word text="LLs">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="Linked">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="List">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="MAX">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="MODIFIED">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="NULL">
+		<file name="hehe.c">62</file>
+	</word>
+	<word text="O">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="PATH">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="RDONLY">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="REG">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="UTF">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="XML">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="a">
+		<file name="hehe.c">10</file>
+	</word>
+	<word text="about">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="add">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="addMe">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="after">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="aka">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="algorithm">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="all">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="allStrings">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="allWords">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="allocated">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="allow">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="alpha">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="already">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="although">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="amount">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="an">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="and">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="append">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="approaches">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="are">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="argc">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="argv">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="arr">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="array">
+		<file name="hehe.c">13</file>
+	</word>
+	<word text="as">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="assume">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="at">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="b">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="base">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="basically">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="be">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="before">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="behind">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="both">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="bounds">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="break">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="bs">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="bucket">
+		<file name="hehe.c">10</file>
+	</word>
+	<word text="buckets">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="buffLength">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="buffer">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="but">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="by">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="c">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="calls">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="can">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="case">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="change">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="char">
+		<file name="hehe.c">72</file>
+	</word>
+	<word text="character">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="check">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="checking">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="checks">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="child">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="clearBuffer">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="close">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="closeFI">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="closedir">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="cmon">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="cmp">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="code">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="come">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="comes">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="complete">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="concat">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="considering">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="containing">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="continue">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="copied">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="copy">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="corner">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="correct">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="corresponding">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="count">
+		<file name="hehe.c">25</file>
+	</word>
+	<word text="countStr">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="counted">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="counters">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="create">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="createNode">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="ctype">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="currWord">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="current">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="currently">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="cuz">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="d">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="data">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="deal">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="declared">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="delim">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="deliminators">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="depending">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="desired">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="detatch">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="dict">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="dictionary">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="different">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="digits">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="dir">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="directory">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="dirent">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="dirp">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="does">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="doesn">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="dp">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="dupes">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="duplicates">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="each">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="else">
+		<file name="hehe.c">22</file>
+	</word>
+	<word text="encoding">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="end">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="equal">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="error">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="eval">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="every">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="everything">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="except">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="exist">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="exists">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="expression">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="extra">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="extremely">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="faster">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="fclose">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fcntl">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="file">
+		<file name="hehe.c">13</file>
+	</word>
+	<word text="fileIndex">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="fileList">
+		<file name="hehe.c">16</file>
+	</word>
+	<word text="fileListHead">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fileName">
+		<file name="hehe.c">10</file>
+	</word>
+	<word text="filename">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="files">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="final">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="find">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fn">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="fnLen">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="following">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fopen">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="for">
+		<file name="hehe.c">13</file>
+	</word>
+	<word text="fp">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="fprintf">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="freeLaterHead">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fresh">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="from">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="front">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="fuck">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="fucked">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="full">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="function">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="fwrite">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="gets">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="h">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="hNode">
+		<file name="hehe.c">33</file>
+	</word>
+	<word text="happen">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="has">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="hash">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="hashFunction">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="hashTable">
+		<file name="hehe.c">15</file>
+	</word>
+	<word text="hashmap">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="have">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="head">
+		<file name="hehe.c">89</file>
+	</word>
+	<word text="hopefully">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="how">
+		<file name="hehe.c">2</file>
+	</word>
 	<word text="i">
-		<file name="orange.txt">1</file>
+		<file name="hehe.c">29</file>
+	</word>
+	<word text="idk">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="if">
+		<file name="hehe.c">45</file>
+	</word>
+	<word text="implemented">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="in">
+		<file name="hehe.c">15</file>
+	</word>
+	<word text="include">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="increment">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="incrementation">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="indecisive">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="individual">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="inefficient">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="initially">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="input">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="insert">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="insertRecords">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="inserting">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="insertion">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="inserts">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="int">
+		<file name="hehe.c">43</file>
+	</word>
+	<word text="into">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="invalid">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="is">
+		<file name="hehe.c">18</file>
+	</word>
+	<word text="isalpha">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="isdigit">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="isn">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="it">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="iterate">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="iterating">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="iteration">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="iterator">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="just">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="keep">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="keyWord">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="keyword">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="kinds">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="kw">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="kwLLHead">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="kwNode">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="kws">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="lFreq">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="lString">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="last">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="later">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="lateri">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="left">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="leftovers">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="len">
+		<file name="hehe.c">17</file>
+	</word>
+	<word text="length">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="less">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="letter">
+		<file name="hehe.c">2</file>
 	</word>
 	<word text="like">
-		<file name="orange.txt">1</file>
+		<file name="hehe.c">1</file>
 	</word>
-	<word text="oranges">
-		<file name="orange.txt">1</file>
+	<word text="line">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="linear">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="linked">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="list">
+		<file name="hehe.c">15</file>
+	</word>
+	<word text="ll">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="location">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="loop">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="made">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="main">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="make">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="malloc">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="malloced">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="mallocing">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="many">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="master">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="max">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="me">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="megaBuff">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="merge">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="mergeSortKw">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="mergeSortRecords">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="mergesort">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="might">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="modifications">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="modular">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="more">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="n">
+		<file name="hehe.c">13</file>
+	</word>
+	<word text="name">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="necessary">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="need">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="new">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="newHead">
+		<file name="hehe.c">28</file>
+	</word>
+	<word text="newNode">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="newStr">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="newString">
+		<file name="hehe.c">8</file>
+	</word>
+	<word text="newTemp">
+		<file name="hehe.c">36</file>
+	</word>
+	<word text="next">
+		<file name="hehe.c">77</file>
+	</word>
+	<word text="node">
+		<file name="hehe.c">48</file>
+	</word>
+	<word text="nodes">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="non">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="not">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="now">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="numWords">
+		<file name="hehe.c">8</file>
+	</word>
+	<word text="number">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="obviously">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="odd">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="of">
+		<file name="hehe.c">25</file>
+	</word>
+	<word text="on">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="one">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="only">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="oops">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="open">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="openWordText">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="opendir">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="or">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="order">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="original">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="out">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="oxford">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="parsed">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="pass">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="passed">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="path">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="permanent">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="place">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="pointer">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="pointers">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="points">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="pos">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="position">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="pretend">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="prev">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="prevIsLetter">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="print">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="printHLL">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="printLL">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="printf">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="probably">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="problems">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="properly">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="ptr1">
+		<file name="hehe.c">48</file>
+	</word>
+	<word text="ptr2">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="ptrs">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="put">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="puts">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="putting">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="quintillion">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="r">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="rFreq">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="rString">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="re">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="reaches">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="read">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="readdir">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="realloc">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="reason">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="record">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="recordList">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="recordListHead">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="recurse">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="recursively">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="regular">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="reminds">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="remove">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="removeDuplicates">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="repeating">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="required">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="resizable">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="resizing">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="return">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="returns">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="right">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="s">
+		<file name="hehe.c">13</file>
+	</word>
+	<word text="same">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="search">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="separated">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="setting">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="shitty">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="should">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="shouldn">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="side">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="size">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="sizeof">
+		<file name="hehe.c">18</file>
+	</word>
+	<word text="snprintf">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="so">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="some">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="something">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="sort">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="sorted">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="space">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="split">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="sprintf">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="stands">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="stdio">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="stdlib">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="store">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="stored">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="str">
+		<file name="hehe.c">23</file>
+	</word>
+	<word text="strLen">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="strcmp">
+		<file name="hehe.c">8</file>
+	</word>
+	<word text="strcpy">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="string">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="strings">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="strlen">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="struct">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="structure">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="sub">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="subdir">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="subdirectory">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="t">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="table">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="takes">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="technically">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="temp">
+		<file name="hehe.c">41</file>
+	</word>
+	<word text="tempNode">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="testing">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="text">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="than">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="that">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="the">
+		<file name="hehe.c">35</file>
+	</word>
+	<word text="then">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="these">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="they">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="thing">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="this">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="thru">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="time">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="to">
+		<file name="hehe.c">22</file>
+	</word>
+	<word text="together">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="tokenize">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="track">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="trails">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="traverseDir">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="triggers">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="turn">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="type">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="typedef">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="types">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="u">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="unique">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="unistd">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="unsorted">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="until">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="up">
+		<file name="hehe.c">2</file>
+	</word>
+	<word text="usually">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="valid">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="value">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="variables">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="version">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="void">
+		<file name="hehe.c">12</file>
+	</word>
+	<word text="w">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="want">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="way">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="we">
+		<file name="hehe.c">9</file>
+	</word>
+	<word text="what">
+		<file name="hehe.c">3</file>
+	</word>
+	<word text="when">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="where">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="whether">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="which">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="while">
+		<file name="hehe.c">21</file>
+	</word>
+	<word text="whoops">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="will">
+		<file name="hehe.c">6</file>
+	</word>
+	<word text="with">
+		<file name="hehe.c">8</file>
+	</word>
+	<word text="won">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="word">
+		<file name="hehe.c">20</file>
+	</word>
+	<word text="wordArr">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="wordArrLen">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="wordArray">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="wordCount">
+		<file name="hehe.c">11</file>
+	</word>
+	<word text="wordCountPtr">
+		<file name="hehe.c">4</file>
+	</word>
+	<word text="words">
+		<file name="hehe.c">5</file>
+	</word>
+	<word text="works">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="write">
+		<file name="hehe.c">1</file>
+	</word>
+	<word text="writeFp">
+		<file name="hehe.c">7</file>
+	</word>
+	<word text="xml">
+		<file name="hehe.c">5</file>
 	</word>
 </fileIndex>

@@ -25,7 +25,7 @@ typedef struct hNode{
 	struct hNode*  next;
 } hNode;
 	
-int tokenize(char* fileName, char** wordArr);
+char** tokenize(char* fileName, char** wordArray, int* wordCountPtr);
 void clearBuffer(char* str, int len);
 node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
@@ -163,7 +163,8 @@ void traverseDir(hNode** hashTable, char* path){
 			fclose(fp);
 			
 			char** wordArr = (char**)malloc(sizeof(char*) * 100);
-			int numWords = tokenize(path,wordArr);
+			int numWords = 0;
+			wordArr = tokenize(path, wordArr, (int*)&numWords);
 			sort(wordArr, numWords);
 			node* head = removeDuplicates(wordArr, numWords);	
 			insertRecords(hashTable, head, path);
@@ -188,7 +189,8 @@ void traverseDir(hNode** hashTable, char* path){
 				char** wordArr = (char**)malloc(sizeof(char*) * 100);
 
 				//pass by pointer? hopefully this works
-				int numWords = tokenize(child,wordArr);
+				int numWords = 0;
+				wordArr = tokenize(child, wordArr, (int*)&numWords);
 				
 				//should have put an unsorted array into wordArr
 				//sort.
@@ -394,7 +396,7 @@ node* createNode(char* str, int count, node* next){
 	
 }
 
-int tokenize(char* fileName, char** wordArray){ 
+char** tokenize(char* fileName, char** wordArray, int* wordCountPtr){ 
 	//takes in complete file text, file text length,
 	//an array which to place an unsorted list of words, 
 	//and the original length of that array. 
@@ -407,7 +409,7 @@ int tokenize(char* fileName, char** wordArray){
 
 //BEGIN MODIFIED CODE FROM ASS0
         //these variables are for putting separated strings into unsorted array
-        int wordCount = 0;  
+        int wordCount = *wordCountPtr;  
         //initially allow for 100 words before resizing
         //this array is declared in function that calls it (oops, not modular :/)
         int wordArrLen = 100; 
@@ -424,7 +426,7 @@ int tokenize(char* fileName, char** wordArray){
     
         while(read(fp,megaBuff,sizeof(char))){                                                  
                 //checks if character is a letter
-                if(isalpha(megaBuff[0]) ){							
+                if(isalpha(megaBuff[0]) || isdigit(megaBuff[0])){							
                         buffer[len] = megaBuff[0];   					
 
                         //if word length approaches the amount of space allocated
@@ -478,13 +480,11 @@ int tokenize(char* fileName, char** wordArray){
         }
 
 //END CODE FROM ASS0
+		
+	//change value of wordCount by pointer or some bs
+	*(wordCountPtr) = wordCount;
 
-
-	
-	return wordCount;
-
-	
-
+	return wordArray;
 
 }
 
