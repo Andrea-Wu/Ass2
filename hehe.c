@@ -344,39 +344,25 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 			//if word already exists in different file with same name
 			//then just increment count. 
 			//iterate thru list to find out!!
-
-			//node* recordListHead = kwLLHead -> fileList; //to free later
-			node* recordList= kwLLHead -> fileList; //iterator
-			node* recordListTemp;
-
 			
-			//assume the given list is already sorted
-			//this might be wrong comparison 
-			while(recordList != NULL && strcmp(fileName, recordList -> str) < 0){
-	
-				recordListTemp = recordList;
+			node* recordListHead = kwLLHead -> fileList;
+			node* recordList= kwLLHead -> fileList;//iterator
+
+			while(recordList != NULL && strcmp(recordList -> str, fileName) != 0){
 				recordList = recordList -> next;
 			}
-			if(recordList == NULL){
-
-                                recordListTemp -> next = newNode;
-                                newNode -> next = NULL;
-
-                        }else if(strcmp(fileName, recordList -> str) == 0){
-				//fileName already exists in list
-				//increment count
-                                                                                
-				recordList -> count = (recordList -> count) + (newNode -> count);  
-				break;
-			
-			}else if(strcmp(fileName,recordList -> str) > 0){
-
-				recordListTemp -> next = newNode;
-				newNode -> next = recordList;
-				
-			}else{
-				printf("the fuck?\n");
+			if(recordList == NULL){ //filename doesn't exist in record list
+					//add to front of list
+				kwLLHead -> fileList = newNode;
+				newNode -> next = recordListHead;
 			}
+			else{//filename exists in record List, where recordList is desired node 
+				//increment count. 
+				int addMe = newNode -> count;
+				recordList -> count = (recordList -> count) + addMe;
+			}
+
+			
 			
 		}
 	
