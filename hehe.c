@@ -105,41 +105,7 @@ int main(int argc, char* argv[]){
 		//write the xml thing to a file
 		//final line of text will be stored in openWordText
 		
-		char openWordText[] = "\t<word text=\"";
-		char closeWordText[] = "\">\n";		
-		
-		//this should be a separate function lol
-		int newKwLen = strlen(kw) + strlen(openWordText) + strlen(closeWordText);
-			
-		char* newKwStr = (char*)malloc(sizeof(char) * (newKwLen + 1));
-
-		int itr = 0;	
-		int ITR = 0;
-
-		//the while loops have the functionality of strcat (which doesn't work for some reason)
-		while(itr < strlen(openWordText)){
-			newKwStr[itr] = openWordText[itr];
-			itr++;
-			ITR++;
-		}
-
-
-		itr = 0;
-                while(itr < strlen(kw)){
-                        newKwStr[ITR] = kw[itr];
-                        itr++;
-                        ITR++;
-                }
-
-		itr = 0;
-                while(itr < strlen(closeWordText)){
-                        newKwStr[ITR] = closeWordText[itr];
-                        itr++;
-                        ITR++;
-                }
-		
-
-		fwrite(newKwStr, sizeof(char), strlen(newKwStr), writeFp);
+		fprintf(writeFp, "\t<word text=\"%s\">\n", kw);
 		
 		node* fileList = head -> fileList;
 
@@ -155,61 +121,15 @@ int main(int argc, char* argv[]){
 
 			int count = fileList -> count;
 
-			char frag1[] = "\t\t<file name=\"";
-			char frag2[] = "\">";
-			char frag3[] = "</file>\n";
-
 			//assume the number won't be more than 20 digits...
 			//...10 quintillion
 
 			char countStr[20];
 			sprintf(countStr, "%d", count);
 
-			//malloc a string that's big enough
-			//while loops function as strcat
-			int newLen = strlen(str) + strlen(countStr) + strlen(frag1) \
-					+ strlen(frag2) + strlen(frag3);	
-	
-			char* newStr = (char*)malloc(sizeof(char) *(newLen + 1));
+			fprintf(writeFp, "\t\t<file name=\"%s\">%s</file>\n", str,countStr);		
 			
-			int IT = 0;	
-			int it = 0;
-			while(it < strlen(frag1)){
-				newStr[it] = frag1[it];
-				it++;
-				IT++;
-			}
-		
-			it = 0;
-			while(it < strlen(str)){
-				newStr[IT] = str[it];
-				it++;
-				IT++;
-			} 
-	
-                        it = 0;
-                        while(it < strlen(frag2)){
-                                newStr[IT] = frag2[it];
-				it++;
-				IT++;
-                        }
-			
-			
-                        it = 0;
-                        while(it < strlen(countStr)){
-                                newStr[IT] = countStr[it];
-				it++;
-				IT++;
-                        }
-	
-			it = 0;
-                        while(it < strlen(frag3)){
-                                newStr[IT] = frag3[it];
-                                it++;
-                                IT++;
-                        }
-	 
-			fwrite(newStr, sizeof(char), strlen(newStr), writeFp);
+                          
 
 			fileList = fileList -> next;
 		}
