@@ -30,7 +30,6 @@ void sort(char** allStrings, int wordCount);
 node* removeDuplicates(char** allWords, int len);
 void printHLL(hNode* head);
 void printLL(node* head);
-void insertKeyWord(hNode** hashTable, hNode* insertMe);
 void traverseDir(hNode** hashTable, char* path);
 void insertRecords(hNode** hashTable, node* head, char* fileName);
 int hashFunction(char* str);
@@ -117,6 +116,7 @@ int main(int argc, char* argv[]){
 		int itr = 0;	
 		int ITR = 0;
 
+		//the while loops have the functionality of strcat (which doesn't work for some reason)
 		while(itr < strlen(openWordText)){
 			newKwStr[itr] = openWordText[itr];
 			itr++;
@@ -145,7 +145,9 @@ int main(int argc, char* argv[]){
 
 		//FOR FREE
 		//node* fileListHead = fileList;
-		fileList = mergeSortRecords(fileList);
+	
+		//assume sorted already
+		//fileList = mergeSortRecords(fileList);
 		
 		//print fileList as XML to file
 		while(fileList != NULL){
@@ -164,6 +166,7 @@ int main(int argc, char* argv[]){
 			sprintf(countStr, "%d", count);
 
 			//malloc a string that's big enough
+			//while loops function as strcat
 			int newLen = strlen(str) + strlen(countStr) + strlen(frag1) \
 					+ strlen(frag2) + strlen(frag3);	
 	
@@ -299,8 +302,6 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 	//head is an LL with node containing keyword, count, and next.
 	//we have to turn each node into a different node, containing filename, count, and next.
 	//and then insert that into the sub-LL (I just made up a word)
-	//just occurred to me that I'm inserting my nodes at the end of LL but it
-	//but it's more efficient to insert in the front. later
 	
 	while(head != NULL){
 		//copy fileName into permanent string
@@ -340,61 +341,48 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 		}
 		//word exists as a kw
 		else{
-			//word might already exists in different file with same name
+			//if word already exists in different file with same name
 			//then just increment count. 
 			//iterate thru list to find out!!
-			//this is highly inefficient b/c i'm already iterating thru list,
-			//	might as well just sort it?? lmao rip merge sort. later 
 
-			node* recordListHead = kwLLHead -> fileList;
+			//node* recordListHead = kwLLHead -> fileList; //to free later
 			node* recordList= kwLLHead -> fileList; //iterator
+			node* recordListTemp;
+
 			
-			while(recordList != NULL && strcmp(recordList -> str, fileName) != 0){
+			//assume the given list is already sorted
+			//this might be wrong comparison 
+			while(recordList != NULL && strcmp(fileName, recordList -> str) < 0){
+	
+				recordListTemp = recordList;
 				recordList = recordList -> next;
 			}
-			if(recordList == NULL){ //this filename doesn't exist in record List
-				//add to front of list
+			if(recordList == NULL){
+
+                                recordListTemp -> next = newNode;
+                                newNode -> next = NULL;
+
+                        }else if(strcmp(fileName, recordList -> str) == 0){
+				//fileName already exists in list
+				//increment count
+                                                                                
+				recordList -> count = (recordList -> count) + (newNode -> count);  
+				break;
+			
+			}else if(strcmp(fileName,recordList -> str) > 0){
+
+				recordListTemp -> next = newNode;
+				newNode -> next = recordList;
 				
-				kwLLHead -> fileList = newNode;
-				newNode -> next = recordListHead;
+			}else{
+				printf("the fuck?\n");
 			}
-			else{ //filename exists in record List, where recordList is desired node 
-				//increment count. 
-				int addMe = newNode -> count;
-				recordList -> count = (recordList -> count) + addMe;
-			}
+			
 		}
 	
 		head = head -> next;
 	}
 }
-
-//inserts a single hNode into the hashTable
-//this function is no longer necessary
-void insertKeyWord(hNode** hashTable, hNode* insertMe){
-	char* keyWord = insertMe -> keyWord;
-	int bucket = hashFunction(keyWord);
-
-	//gets linked list present at hashtable[bucket]
-	hNode* head = *(hashTable + bucket);
-
-	//if there's no LL
-	if(head == NULL){
-		*(hashTable + bucket) = insertMe;
-		return;
-	}
-	//else
-	hNode* temp;
-	while(head != NULL){
-		temp = head;
-		head = head -> next;
-	}
-
-	//when inserting, just append to end of list...will merge sort later
-	temp -> next = insertMe;
-
-}
-
 
 //this is a shitty & temp hash function
 //we will change it later depending on how many buckets we want,
