@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileIndex>
-	<word text="f">
-		<file name="heeheee.txt">1</file>
+	<word text="and">
+		<file name="baa.txt">1</file>
 	</word>
-	<word text="shit">
-		<file name="heeheee.txt">1</file>
-		<file name="ha.txt">1</file>
+	<word text="ass">
+		<file name="ass.txt">3</file>
 	</word>
-	<word text="this">
-		<file name="heeheee.txt">1</file>
+	<word text="goes">
+		<file name="baa.txt">1</file>
 	</word>
-	<word text="yo">
-		<file name="heeheee.txt">1</file>
-		<file name="ha.txt">1</file>
+	<word text="haha">
+		<file name="haha.txt">1</file>
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="hehe">
+		<file name="haha.txt">1</file>
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="hihi">
+		<file name="haha.txt">1</file>
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="hohoho">
+		<file name="haha.txt">1</file>
+	</word>
+	<word text="it">
+		<file name="baa.txt">1</file>
+	</word>
+	<word text="so">
+		<file name="baa.txt">1</file>
 	</word>
 </fileIndex>

@@ -105,41 +105,7 @@ int main(int argc, char* argv[]){
 		//write the xml thing to a file
 		//final line of text will be stored in openWordText
 		
-		char openWordText[] = "\t<word text=\"";
-		char closeWordText[] = "\">\n";		
-		
-		//this should be a separate function lol
-		int newKwLen = strlen(kw) + strlen(openWordText) + strlen(closeWordText);
-			
-		char* newKwStr = (char*)malloc(sizeof(char) * (newKwLen + 1));
-
-		int itr = 0;	
-		int ITR = 0;
-
-		//the while loops have the functionality of strcat (which doesn't work for some reason)
-		while(itr < strlen(openWordText)){
-			newKwStr[itr] = openWordText[itr];
-			itr++;
-			ITR++;
-		}
-
-
-		itr = 0;
-                while(itr < strlen(kw)){
-                        newKwStr[ITR] = kw[itr];
-                        itr++;
-                        ITR++;
-                }
-
-		itr = 0;
-                while(itr < strlen(closeWordText)){
-                        newKwStr[ITR] = closeWordText[itr];
-                        itr++;
-                        ITR++;
-                }
-		
-
-		fwrite(newKwStr, sizeof(char), strlen(newKwStr), writeFp);
+		fprintf(writeFp, "\t<word text=\"%s\">\n", kw);
 		
 		node* fileList = head -> fileList;
 
@@ -155,61 +121,15 @@ int main(int argc, char* argv[]){
 
 			int count = fileList -> count;
 
-			char frag1[] = "\t\t<file name=\"";
-			char frag2[] = "\">";
-			char frag3[] = "</file>\n";
-
 			//assume the number won't be more than 20 digits...
 			//...10 quintillion
 
 			char countStr[20];
 			sprintf(countStr, "%d", count);
 
-			//malloc a string that's big enough
-			//while loops function as strcat
-			int newLen = strlen(str) + strlen(countStr) + strlen(frag1) \
-					+ strlen(frag2) + strlen(frag3);	
-	
-			char* newStr = (char*)malloc(sizeof(char) *(newLen + 1));
+			fprintf(writeFp, "\t\t<file name=\"%s\">%s</file>\n", str,countStr);		
 			
-			int IT = 0;	
-			int it = 0;
-			while(it < strlen(frag1)){
-				newStr[it] = frag1[it];
-				it++;
-				IT++;
-			}
-		
-			it = 0;
-			while(it < strlen(str)){
-				newStr[IT] = str[it];
-				it++;
-				IT++;
-			} 
-	
-                        it = 0;
-                        while(it < strlen(frag2)){
-                                newStr[IT] = frag2[it];
-				it++;
-				IT++;
-                        }
-			
-			
-                        it = 0;
-                        while(it < strlen(countStr)){
-                                newStr[IT] = countStr[it];
-				it++;
-				IT++;
-                        }
-	
-			it = 0;
-                        while(it < strlen(frag3)){
-                                newStr[IT] = frag3[it];
-                                it++;
-                                IT++;
-                        }
-	 
-			fwrite(newStr, sizeof(char), strlen(newStr), writeFp);
+                          
 
 			fileList = fileList -> next;
 		}
@@ -344,39 +264,25 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 			//if word already exists in different file with same name
 			//then just increment count. 
 			//iterate thru list to find out!!
-
-			//node* recordListHead = kwLLHead -> fileList; //to free later
-			node* recordList= kwLLHead -> fileList; //iterator
-			node* recordListTemp;
-
 			
-			//assume the given list is already sorted
-			//this might be wrong comparison 
-			while(recordList != NULL && strcmp(fileName, recordList -> str) < 0){
-	
-				recordListTemp = recordList;
+			node* recordListHead = kwLLHead -> fileList;
+			node* recordList= kwLLHead -> fileList;//iterator
+
+			while(recordList != NULL && strcmp(recordList -> str, fileName) != 0){
 				recordList = recordList -> next;
 			}
-			if(recordList == NULL){
-
-                                recordListTemp -> next = newNode;
-                                newNode -> next = NULL;
-
-                        }else if(strcmp(fileName, recordList -> str) == 0){
-				//fileName already exists in list
-				//increment count
-                                                                                
-				recordList -> count = (recordList -> count) + (newNode -> count);  
-				break;
-			
-			}else if(strcmp(fileName,recordList -> str) > 0){
-
-				recordListTemp -> next = newNode;
-				newNode -> next = recordList;
-				
-			}else{
-				printf("the fuck?\n");
+			if(recordList == NULL){ //filename doesn't exist in record list
+					//add to front of list
+				kwLLHead -> fileList = newNode;
+				newNode -> next = recordListHead;
 			}
+			else{//filename exists in record List, where recordList is desired node 
+				//increment count. 
+				int addMe = newNode -> count;
+				recordList -> count = (recordList -> count) + addMe;
+			}
+
+			
 			
 		}
 	
