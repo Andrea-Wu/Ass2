@@ -7,10 +7,7 @@
 #include <fcntl.h>
 
 
-//indecisive about whether to make this 1 or 2 different types of node
-//cuz technically they're the same structure
-//although considering the extremely fucked up way i implemented this, 
-//i'll probably need like 3 different kinds of node
+
 typedef struct node{
 	char* str;
 	int count;
@@ -18,25 +15,25 @@ typedef struct node{
 } node;
 
 
-//stands for "hash node"
-typedef struct hNode{
+//stands for "keyword node" 
+typedef struct kNode{
 	node* fileList;
 	char* keyWord;
-	struct hNode*  next;
-} hNode;
+	struct kNode*  next;
+} kNode;
 	
 char** tokenize(char* fileName, char** wordArray, int* wordCountPtr);
 void clearBuffer(char* str, int len);
 node* createNode(char* str, int count, node* next);
 void sort(char** allStrings, int wordCount);
 node* removeDuplicates(char** allWords, int len);
-void printHLL(hNode* head);
+void printHLL(kNode* head);
 void printLL(node* head);
-void traverseDir(hNode** hashTable, char* path);
-void insertRecords(hNode** hashTable, node* head, char* fileName);
+void traverseDir(kNode** hashTable, char* path);
+void insertRecords(kNode** hashTable, node* head, char* fileName);
 int hashFunction(char* str);
 
-hNode* mergeSortKw(hNode* head);
+kNode* mergeSortKw(kNode* head);
 node* mergeSortRecords(node* head);
 
 int main(int argc, char* argv[]){
@@ -51,16 +48,38 @@ int main(int argc, char* argv[]){
 		printf("Warning: Extra argument will not be processed. Continuing.\n");
 	}
 
+	//checks if argv[1] is a directory
 	DIR* dirp = opendir(argv[1]);
 	if(dirp){
 		printf("Error: First argument cannot be a directory\n");
 		return 1;
 	} 
 
-	//check if argv[1] is a dir		
+	//checks if argv[1] already exists as a file, gives user option to overwrite or not 
+	FILE* fp = fopen(argv[1], "r");
+	if(fp){
+		printf("Warning: The file you are writing to already exixts. Do you wish to overwrite? [y/n]\n");
+
+		//allow user to be 99 extra characters of stupid
+		//if it breaks b/c the user doesn't know how to enter y/n, it is their fault
+		char* c = (char*)malloc(sizeof(char) * 100);
+		int again = 0;
+		do{
+			if(again){
+				printf("Type 'y' or 'n'\n");
+			}
+			scanf("%s", c);
+			again = 1;
+		}while(strcmp("y", c) != 0 && strcmp("n", c) != 0);
+
+		if(strcmp("n", c) == 0){
+			return 1;
+		}
+	}
+		
 
 
-	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
+	kNode** hashTable = (kNode**)malloc(sizeof(kNode*) * 1000);
 
 	traverseDir(hashTable, argv[2]);
 
@@ -68,8 +87,8 @@ int main(int argc, char* argv[]){
 	//time to print everything out!
 		
 	//remove all of the nodes from the hash table and turn into a LL
-	hNode* head = NULL;
-	hNode* temp;
+	kNode* head = NULL;
+	kNode* temp;
 	int i = 0;
 	while(i < 1000){
 		if(hashTable[i] != NULL){
@@ -113,7 +132,7 @@ int main(int argc, char* argv[]){
 	fwrite(fileIndex, sizeof(char), strlen(fileIndex), writeFp);
 	
 	//FOR FREE
-	//hNode* freeLaterHead = head;
+	//kNode* freeLaterHead = head;
 
 	while(head != NULL){
 		char* kw = head -> keyWord;
@@ -164,7 +183,7 @@ int main(int argc, char* argv[]){
 }
 
 //ERRNO
-void traverseDir(hNode** hashTable, char* path){
+void traverseDir(kNode** hashTable, char* path){
 	DIR* dirp;
 	struct dirent* dp;
 	char child[PATH_MAX]; //idk what path_max is 
@@ -236,7 +255,7 @@ void traverseDir(hNode** hashTable, char* path){
 	closedir(dirp);
 }
 
-void insertRecords(hNode** hashTable, node* head, char* fileName){
+void insertRecords(kNode** hashTable, node* head, char* fileName){
 	//head is an LL with node containing keyword, count, and next.
 	//we have to turn each node from head into a different node, containing filename, count, and next.
 	//and then insert that into the sub-LL (I just made up a word)
@@ -256,9 +275,9 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 		int bucket = hashFunction(currWord);
 
 			//stands for "keyword linked-list head"
-		hNode* kwLLHead = hashTable[bucket];
+		kNode* kwLLHead = hashTable[bucket];
 
-			//gets hNode corresponding with current keyword
+			//gets kNode corresponding with current keyword
 			//this is linear search...inefficient
 		while( kwLLHead != NULL && strcmp(kwLLHead -> keyWord, currWord) != 0){
 			kwLLHead = kwLLHead -> next;
@@ -266,14 +285,14 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 	
 		//word doesn't exist as a kw in hash table
 		if(kwLLHead == NULL){
-			hNode* kwNode = (hNode*)malloc(sizeof(hNode));
+			kNode* kwNode = (kNode*)malloc(sizeof(kNode));
 
 			//the list will only have 1 file, the one u currently parsed
 			kwNode -> fileList = newNode;
 			kwNode -> keyWord = currWord;
 
 			//insert at front of linked list
-			hNode* temp = hashTable[bucket];
+			kNode* temp = hashTable[bucket];
 			hashTable[bucket] = kwNode;
 			kwNode -> next = temp;
 		}
@@ -308,9 +327,7 @@ void insertRecords(hNode** hashTable, node* head, char* fileName){
 	}
 }
 
-//this is a shitty & temp hash function
-//we will change it later depending on how many buckets we want,
-//or if we make the hashmap resizable
+//do we want to rehash? current ansert: no
 int hashFunction(char* str){
 	int strLen = strlen(str);
 
@@ -519,8 +536,8 @@ void printLL(node* head){ //for testing only
 }
 
 
-void printHLL(hNode* head){ //for testing only
-        hNode* temp = head;
+void printHLL(kNode* head){ //for testing only
+        kNode* temp = head;
         while(temp != NULL){
                 printf("str is %s\n", temp -> keyWord);
                 temp = temp -> next;
@@ -528,9 +545,9 @@ void printHLL(hNode* head){ //for testing only
 }
 
 
-//takes in hNode head
-//returns sorted hNode head
-hNode* mergeSortKw(hNode* head){
+//takes in kNode head
+//returns sorted kNode head
+kNode* mergeSortKw(kNode* head){
 	
 	//base case
 	if(head == NULL || head -> next == NULL){
@@ -541,9 +558,9 @@ hNode* mergeSortKw(hNode* head){
 	//ptr2 2x faster than ptr1
 	//temp trails behind ptr1 so we can properly split the LLs
 		//by setting temp -> next = NULL
-	hNode* temp;
-	hNode* ptr1 = head;
-	hNode* ptr2 = head;
+	kNode* temp;
+	kNode* ptr1 = head;
+	kNode* ptr2 = head;
 	while(ptr2 != NULL && ptr2-> next != NULL){
 		temp = ptr1;
 		ptr1 = ptr1 -> next;
@@ -562,8 +579,8 @@ hNode* mergeSortKw(hNode* head){
 
 
 	//merge ptr1 and head together
-	hNode* newHead = NULL;
-	hNode* newTemp;
+	kNode* newHead = NULL;
+	kNode* newTemp;
 	while(head != NULL && ptr1 != NULL){ 
 		char* lString = head -> keyWord;
 		char* rString = ptr1 -> keyWord;

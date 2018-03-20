@@ -1,54 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileIndex>
-	<word text="0">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="1">
-		<file name="bob.txt">4</file>
-	</word>
-	<word text="8">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="UTF">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="encoding">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="file">
-		<file name="bob.txt">6</file>
-	</word>
-	<word text="fileIndex">
-		<file name="bob.txt">2</file>
-	</word>
 	<word text="h">
-		<file name="bob.txt">1</file>
+		<file name="orange.txt">1</file>
 	</word>
 	<word text="include">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="name">
-		<file name="bob.txt">3</file>
-	</word>
-	<word text="orange">
-		<file name="bob.txt">3</file>
+		<file name="orange.txt">1</file>
 	</word>
 	<word text="stdio">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="text">
-		<file name="bob.txt">3</file>
-	</word>
-	<word text="txt">
-		<file name="bob.txt">3</file>
-	</word>
-	<word text="version">
-		<file name="bob.txt">1</file>
-	</word>
-	<word text="word">
-		<file name="bob.txt">6</file>
-	</word>
-	<word text="xml">
-		<file name="bob.txt">1</file>
+		<file name="orange.txt">1</file>
 	</word>
 </fileIndex>
