@@ -43,9 +43,23 @@ int main(int argc, char* argv[]){
 	//an array of hash nodes
 	
 	if(argv[1] == NULL || argv[2] == NULL){
-		printf("invalid input\n");
+		printf("Error: invalid number of arguments\n");
 		return 1;
 	}
+
+	if(argc > 3){
+		printf("Warning: Extra argument will not be processed. Continuing.\n");
+	}
+
+	DIR* dirp = opendir(argv[1]);
+	if(dirp){
+		printf("Error: First argument cannot be a directory\n");
+		return 1;
+	} 
+
+	//check if argv[1] is a dir		
+
+
 	hNode** hashTable = (hNode**)malloc(sizeof(hNode*) * 1000);
 
 	traverseDir(hashTable, argv[2]);
@@ -181,7 +195,7 @@ void traverseDir(hNode** hashTable, char* path){
 
  			//concat path & subdir name
                         snprintf(child, PATH_MAX, "%s/%s", path, dp -> d_name);
-			printf("%s\n", child);
+		
                                   
 			if(dp -> d_type == DT_REG){ //is regular file
 				//create array pointer and tokenize into array
