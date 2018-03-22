@@ -32,9 +32,13 @@ void printLL(node* head);
 void traverseDir(kNode** hashTable, char* path);
 void insertRecords(kNode** hashTable, node* head, char* fileName);
 int hashFunction(char* str);
+void freeHashTable(kNode** hashTable);
 
 kNode* mergeSortKw(kNode* head);
 node* mergeSortRecords(node* head);
+
+void freeNodes(node* head);
+void freeKNodes(kNode* head);
 
 int main(int argc, char* argv[]){
 	//an array of hash nodes
@@ -62,7 +66,7 @@ int main(int argc, char* argv[]){
 
 		//allow user to be 99 extra characters of stupid
 		//if it breaks b/c the user doesn't know how to enter y/n, it is their fault
-		char* c = (char*)malloc(sizeof(char) * 100);
+		char* c = (char*)malloc(sizeof(char) * 100); //freed
 		int again = 0;
 		do{
 			if(again){
@@ -75,11 +79,13 @@ int main(int argc, char* argv[]){
 		if(strcmp("n", c) == 0){
 			return 1;
 		}
+
+		free(c);
 	}
 		
 
 
-	kNode** hashTable = (kNode**)malloc(sizeof(kNode*) * 1000);
+	kNode** hashTable = (kNode**)malloc(sizeof(kNode*) * 13); //freed
 
 	traverseDir(hashTable, argv[2]);
 
@@ -90,7 +96,7 @@ int main(int argc, char* argv[]){
 	kNode* head = NULL;
 	kNode* temp;
 	int i = 0;
-	while(i < 1000){
+	while(i < 13){
 		if(hashTable[i] != NULL){
 
 			//concat to LL
@@ -109,7 +115,8 @@ int main(int argc, char* argv[]){
 			//iterate until temp reaches end, so we can concat to the end next time
 			while(temp -> next != NULL){
 				temp = temp -> next;
-			}	
+			}
+			hashTable[i] = NULL;	
 		}
 		i++;
 	}
@@ -132,7 +139,7 @@ int main(int argc, char* argv[]){
 	fwrite(fileIndex, sizeof(char), strlen(fileIndex), writeFp);
 	
 	//FOR FREE
-	//kNode* freeLaterHead = head;
+	kNode* freeLaterHead = head;
 
 	while(head != NULL){
 		char* kw = head -> keyWord;
@@ -177,7 +184,9 @@ int main(int argc, char* argv[]){
 	}
 
 	char closeFI[] = "</fileIndex>\n";
-	fwrite(closeFI, sizeof(char), strlen(closeFI), writeFp);	
+	fwrite(closeFI, sizeof(char), strlen(closeFI), writeFp);
+
+	freeKNodes(freeLaterHead);	
 	
 	return 0;
 }
@@ -195,12 +204,24 @@ void traverseDir(kNode** hashTable, char* path){
 			//close for now, we are only checking if it exists
 			fclose(fp);
 			
-			char** wordArr = (char**)malloc(sizeof(char*) * 100);
+			char** wordArr = (char**)malloc(sizeof(char*) * 100); //freed
 			int numWords = 0;
+
+			//this function will also change the value of numWords.
 			wordArr = tokenize(path, wordArr, (int*)&numWords);
 			sort(wordArr, numWords);
 			node* head = removeDuplicates(wordArr, numWords);	
 			insertRecords(hashTable, head, path);
+
+			//free the LL malloc'd in removeDuplicates()
+			freeNodes(head);
+
+			//frees wordArr & strings in array
+			int i;
+			for(i = 0; i < numWords; i++){
+				free(wordArr[i]);
+			}
+			free(wordArr);
 
 		}else{ //invalid file name
 			printf("error: invalid file name\n");			
@@ -219,7 +240,7 @@ void traverseDir(kNode** hashTable, char* path){
 			if(dp -> d_type == DT_REG){ //is regular file
 				//create array pointer and tokenize into array
 				//the tokenize() function does the mallocing
-				char** wordArr = (char**)malloc(sizeof(char*) * 100);
+				char** wordArr = (char**)malloc(sizeof(char*) * 100); //freed
 
 				//pass by pointer? hopefully this works
 				int numWords = 0;
@@ -234,7 +255,16 @@ void traverseDir(kNode** hashTable, char* path){
 
 				//insert each node into the master linked list
 				insertRecords(hashTable, head, dp -> d_name);
-			
+
+				//frees nodes created in removeDuplicates()
+				freeNodes(head);	
+
+				//frees wordArr & strings in array
+				int j;
+				for(j = 0; j < numWords; j++){
+					free(wordArr[j]);
+				}
+				free(wordArr);
 				
 			}else if(dp -> d_type == DT_DIR){ //this is dir
 
@@ -263,7 +293,7 @@ void insertRecords(kNode** hashTable, node* head, char* fileName){
 	while(head != NULL){
 		//copy fileName into permanent string
 		int fnLen = strlen(fileName);
-		char* fn = (char*)malloc((fnLen + 1) * sizeof(char));
+		char* fn = (char*)malloc((fnLen + 1) * sizeof(char)); //freed
 		strcpy(fn, fileName);
 
 
@@ -285,11 +315,15 @@ void insertRecords(kNode** hashTable, node* head, char* fileName){
 	
 		//word doesn't exist as a kw in hash table
 		if(kwLLHead == NULL){
-			kNode* kwNode = (kNode*)malloc(sizeof(kNode));
+			kNode* kwNode = (kNode*)malloc(sizeof(kNode)); //freed
 
 			//the list will only have 1 file, the one u currently parsed
 			kwNode -> fileList = newNode;
-			kwNode -> keyWord = currWord;
+
+			char* ass = (char*)malloc(sizeof(char) * (strlen(currWord) + 1));
+
+			strcpy(ass, currWord);
+			kwNode -> keyWord = ass;
 
 			//insert at front of linked list
 			kNode* temp = hashTable[bucket];
@@ -325,6 +359,7 @@ void insertRecords(kNode** hashTable, node* head, char* fileName){
 	
 		head = head -> next;
 	}
+
 }
 
 //do we want to rehash? current ansert: no
@@ -339,7 +374,7 @@ int hashFunction(char* str){
 		i++;
 	}
 
-	bucket = bucket % 1000;
+	bucket = bucket % 13;
 	return bucket;
 }
 
@@ -415,7 +450,7 @@ node* createNode(char* str, int count, node* next){
 	
 	//create permanent string
 	int strLen = strlen(str);
-	char* newStr= (char*)malloc((strLen+ 1) * sizeof(char));
+	char* newStr= (char*)malloc((strLen+ 1) * sizeof(char)); 
 	strcpy(newStr, str);
 
 	node* newNode = (node*)malloc(sizeof(node));
@@ -445,11 +480,11 @@ char** tokenize(char* fileName, char** wordArray, int* wordCountPtr){
         //this array is declared in function that calls it (oops, not modular :/)
         int wordArrLen = 100; 
     
-	char* megaBuff = (char*)malloc(sizeof(char*) * 3);
+	char* megaBuff = (char*)malloc(sizeof(char*) * 3); //freed
     
         //string buffer to read individual words
         int len = 0; //current word length
-        char* buffer = (char*)malloc(20 * sizeof(char));
+        char* buffer = (char*)malloc(20 * sizeof(char));  //freed
         int buffLength = 20; 
 
         //keep track of repeating deliminators
@@ -477,7 +512,7 @@ char** tokenize(char* fileName, char** wordArray, int* wordCountPtr){
                         }
     
 
-                        char* newString = (char*)malloc(sizeof(char) * (len+1));
+                        char* newString = (char*)malloc(sizeof(char) * (len+1));   //freed
 
                         //strcpy buffer  to a permanent location
                         newString = strcpy(newString, buffer);
@@ -504,7 +539,7 @@ char** tokenize(char* fileName, char** wordArray, int* wordCountPtr){
         //non-alpha character usually triggers putting word into array
         //but last word might not end with delim.
         if(prevIsLetter == 1){
-                char* newString = (char*)malloc(sizeof(char) * (len+1));
+                char* newString = (char*)malloc(sizeof(char) * (len+1)); //freed
                 newString = strcpy(newString,buffer);
                 wordArray[wordCount] = newString;
                 wordCount++;
@@ -515,6 +550,8 @@ char** tokenize(char* fileName, char** wordArray, int* wordCountPtr){
 	//change value of wordCount by pointer or some bs
 	*(wordCountPtr) = wordCount;
 
+	free(buffer);
+	free(megaBuff);
 	return wordArray;
 
 }
@@ -732,6 +769,68 @@ node* mergeSortRecords(node* head){
         return newHead;
 
 }
+
+
+void freeKNodes(kNode* head){
+
+	//base case
+	if(head == NULL){
+		return;
+	}
+
+	//free string
+	free(head -> keyWord);
+	
+	//free fileList linked list 
+	freeNodes(head -> fileList);	
+
+	//recursively free LL
+	freeKNodes(head -> next);
+	
+	free(head);
+}
+
+void freeNodes(node* head){
+
+	if(head == NULL){
+		return;
+	}
+
+	//free string
+	free(head -> str);
+
+	//recursively free next
+	freeNodes(head -> next);
+	
+	free(head);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
