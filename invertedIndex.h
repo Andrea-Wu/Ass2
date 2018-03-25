@@ -19,8 +19,6 @@
  node* createNode(char* str, int count, node* next);
  void sort(char** allStrings, int wordCount);
  node* removeDuplicates(char** allwords, int len);
- void printHLL(kNode* head);
- void PrintLL (node* head);
  void traverseDir(kNode** hashTable, char* path);
  void insertRecords(kNode** hashTable, node* head, char* fileName);
  int hashFunction(char* str);
