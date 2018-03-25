@@ -248,11 +248,18 @@ void traverseDir(kNode** hashTable, char* path){
 void insertRecords(kNode** hashTable, node* head, char* fileName){
 	//head is an LL with node containing keyword, count, and next.
 	//we have to turn each node from head into a different node, containing filename, count, and next.
-	//and then insert that into the sub-LL (I just made up a word)
+	//and then insert that into the fileList LL
+	
+	//lowercases all filenames
+	int fnLen = strlen(fileName);
+	int k;
+	for(k = 0; k < fnLen; k++){
+		fileName[k] = tolower(fileName[k]);
+	} 
 	
 	while(head != NULL){
 		//copy fileName into permanent string
-		int fnLen = strlen(fileName);
+		//int fnLen = strlen(fileName);
 		char* fn = (char*)malloc((fnLen + 1) * sizeof(char)); //freed
 		strcpy(fn, fileName);
 
