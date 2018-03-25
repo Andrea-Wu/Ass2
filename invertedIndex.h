@@ -2,8 +2,6 @@
 #define INVERTEDINDEX_H_
 
 
- #define BUFSIZE 5000
-
  typedef struct node{
 	char* str;
 	int count;
@@ -26,7 +24,6 @@
  void traverseDir(kNode** hashTable, char* path);
  void insertRecords(kNode** hashTable, node* head, char* fileName);
  int hashFunction(char* str);
-
 
  kNode* mergeSortKw(kNode* head);
  node* mergeSortRecords(node* head);
