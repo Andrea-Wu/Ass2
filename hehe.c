@@ -254,7 +254,9 @@ void insertRecords(kNode** hashTable, node* head, char* fileName){
 	int fnLen = strlen(fileName);
 	int k;
 	for(k = 0; k < fnLen; k++){
-		fileName[k] = tolower(fileName[k]);
+		if(isalpha(fileName[k])){
+			fileName[k] = tolower(fileName[k]);
+		}
 	} 
 	
 	while(head != NULL){
