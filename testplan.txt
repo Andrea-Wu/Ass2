@@ -68,3 +68,8 @@ Result: Every filename except for the first 2 are ignored, warning message print
 Testcase #11: only 1 file name is passed in as an argument
 
 Result: Prints error and exits.
+---------------------------
+Testcase #12: a large number of files (20) within a directory
+	To test if code breaks given a large directory structure
+
+Result: Successfully writes to result file
