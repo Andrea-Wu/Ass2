@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<fileIndex>
-	<word text="ass">
-		<file name="ass.txt">2</file>
-	</word>
-</fileIndex>
